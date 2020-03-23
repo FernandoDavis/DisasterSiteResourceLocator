@@ -392,8 +392,8 @@ ALTER SEQUENCE public.supply_suid_seq OWNED BY public.supply.suid;
 
 CREATE TABLE public.users (
     uid integer NOT NULL,
-    email character varying(50) NOT NULL,
-    pass character(8) NOT NULL,
+    uname character varying(50) NOT NULL,
+    upass character(8) NOT NULL,
     first_name character varying(35) NOT NULL,
     last_name character varying(35) NOT NULL
 );
@@ -594,6 +594,7 @@ SELECT pg_catalog.setval('public.orderedsupply_onumber_seq', 1, false);
 
 COPY public.request (reqid, cid, resid, is_void, reqdate) FROM stdin;
 1	1	2	f	2020-03-22
+2	1	5	f	2020-03-23
 \.
 
 
@@ -601,7 +602,7 @@ COPY public.request (reqid, cid, resid, is_void, reqdate) FROM stdin;
 -- Name: request_reqid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.request_reqid_seq', 1, true);
+SELECT pg_catalog.setval('public.request_reqid_seq', 2, true);
 
 
 --
@@ -628,6 +629,7 @@ COPY public.resource (resid, catid, resdescription, resname, reslocation, is_voi
 2	1	Water for your family here	1 Gallon bottles	Calle some	f
 3	3	Baby food for your family here	Banana flavor	Calle some	f
 4	1	bottled water available for sale	Bottled Water	an address	f
+5	1	bottled water requested, please	Bottled Water	another address	f
 \.
 
 
@@ -635,7 +637,7 @@ COPY public.resource (resid, catid, resdescription, resname, reslocation, is_voi
 -- Name: resource_resid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.resource_resid_seq', 4, true);
+SELECT pg_catalog.setval('public.resource_resid_seq', 5, true);
 
 
 --
@@ -676,9 +678,9 @@ SELECT pg_catalog.setval('public.supply_suid_seq', 3, true);
 -- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.users (uid, email, pass, first_name, last_name) FROM stdin;
-1	some@gmail.com	password	Fernando	Davis
+COPY public.users (uid, uname, upass, first_name, last_name) FROM stdin;
 2	another@gmail.com	Password	Jose	Tua
+1	fdavis	password	Fernando	Davis
 \.
 
 
@@ -822,7 +824,7 @@ ALTER TABLE ONLY public.supply
 --
 
 ALTER TABLE ONLY public.users
-    ADD CONSTRAINT users_email_key UNIQUE (email);
+    ADD CONSTRAINT users_email_key UNIQUE (uname);
 
 
 --

@@ -12,44 +12,77 @@ app = Flask(__name__)
 # Apply CORS to this app
 CORS(app)
 
+
 @app.route('/')
 def greeting():
-    print("Welcome to Disaster Site Resource Locator")
-    print("1) Sign-up")
-    print("2) Log-in")
-    typeList = {
-                    "1": "Administrator",
-                    "2": "Supplier",
-                    "3": "Consumer"
-                }
+    value = '''Welcome to Disaster Site Resource Locator\n
+             Go to DSRLApp to get started.'''
+    return value
 
-    while(True):
-        choice = input("Do you want to sign-up or log-in?")
-        if (choice == str(1) or choice == str(2)):
+
+@app.route('/DSRLApp')
+def loginOrSignup():
+    print("Welcome to Disaster Site Resource Locator")
+    print("1) Log-in")
+    print("2) Sign-up")
+
+    typeList = {
+        "1": "Administrator",
+        "2": "Supplier",
+        "3": "Consumer"
+    }
+
+    while True:
+        choice = input("Do you want to log-in or sign-up?")
+        if choice == str(1) or choice == str(2):
             print("What is your user type:")
             print("1) Administrator")
             print("2) Supplier")
             print("3) Consumer")
-            while(True):
+            while True:
                 utype = input("Enter type: ")
-                if utype in typeList:
-                    uname = input("Enter username: ")
-                    upass = input("Enter password: ")
-                    form = {
-                        "uname": uname,
-                        "upass": upass,
-                        "utype": utype
-                    }
-                    if(choice == 1):
+                if utype == str(1) or utype == str(2) or utype == str(3):
+                    if choice == str(1):
+                        uname = input("Enter username: ")
+                        upass = input("Enter password: ")
+                        form = {
+                            "uname": uname,
+                            "upass": upass,
+                            "utype": typeList[utype]
+                        }
+                        return UsersHandler().login(form)
+                    if choice == str(2):
+                        uname = input("Enter username: ")
+                        upass = input("Enter password: ")
+                        first_name = input("Enter First Name: ")
+                        last_name = input("Enter Last Name: ")
+                        form = {
+                            "uname": uname,
+                            "upass": upass,
+                            "utype": typeList[utype],
+                            "first_name": first_name,
+                            "last_name": last_name
+                        }
                         return UsersHandler().signup(form)
                     else:
-                        return UsersHandler().login(form)
-
+                        print("Invalid value.")
                 else:
                     print("Invalid value.")
         else:
             print("Invalid value.")
-    # query = "select * from users where uname = %s and upass = %s"
+
+
+@app.route('/DSRLApp/users', methods=['GET', 'POST'])
+def getAllUsersAvailable():
+    if request.method == 'POST':
+        print("REQUEST: ", request.json)
+        return UsersHandler().signup(request.json)
+    else:
+        if not request.args:
+            return UsersHandler().getAllUsers()
+        else:
+            return UsersHandler().searchUsers(request.args)
+
 
 # @app.route('/PartApp/available', methods=['GET', 'POST'])
 # def getAllResourcesAvailable():

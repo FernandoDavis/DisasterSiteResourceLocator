@@ -12,8 +12,152 @@ class ConsumerDAO:
 
     def getAllConsumers(self):
         cursor = self.conn.cursor()
-        query = "select * from consumer;"
+        query = "select cid, uid, uname, upass, first_name, last_name, caddress from consumer natural inner join users;"
         cursor.execute(query)
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result
+
+    def getConsumerById(self, cid):
+        cursor = self.conn.cursor()
+        query = "select cid, uid, uname, upass, first_name, last_name, caddress from consumer natural inner join users where cid = %s;"
+        cursor.execute(query, (cid,))
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result
+
+    def getConsumerByUsername(self, uname):
+        cursor = self.conn.cursor()
+        query = "select cid, uid, uname, upass, first_name, last_name, caddress from consumer natural inner join users where uname = %s;"
+        cursor.execute(query, (uname,))
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result
+
+    def getConsumerByFirstname(self, first_name):
+        cursor = self.conn.cursor()
+        query = "select cid, uid, uname, upass, first_name, last_name, caddress from consumer natural inner join users where first_name = %s;"
+        cursor.execute(query, (first_name,))
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result
+
+    def getConsumerByLastname(self, last_name):
+        cursor = self.conn.cursor()
+        query = "select cid, uid, uname, upass, first_name, last_name, caddress from consumer natural inner join users where last_name = %s;"
+        cursor.execute(query, (last_name,))
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result
+
+    def getConsumerByAddress(self, caddress):
+        cursor = self.conn.cursor()
+        query = "select cid, uid, uname, upass, first_name, last_name, caddress from consumer natural inner join users where caddress = %s;"
+        cursor.execute(query, (caddress,))
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result
+
+    def getConsumerByUserAndFirstAndLastname(self, uname, first_name, last_name):
+        cursor = self.conn.cursor()
+        query = "select cid, uid, uname, upass, first_name, last_name, caddress from consumer natural inner join users where uname = %s and first_name = %s and last_name = %s;"
+        cursor.execute(query, (uname, first_name, last_name))
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result
+
+    def getConsumerByUserAndFirstname(self, uname, first_name):
+        cursor = self.conn.cursor()
+        query = "select cid, uid, uname, upass, first_name, last_name, caddress from consumer natural inner join users where uname = %s and first_name = %s;"
+        cursor.execute(query, (uname, first_name))
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result
+
+    def getConsumerByUserAndLastname(self, uname, last_name):
+        cursor = self.conn.cursor()
+        query = "select cid, uid, uname, upass, first_name, last_name, caddress from consumer natural inner join users where uname = %s and last_name = %s;"
+        cursor.execute(query, (uname, last_name))
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result
+
+    def getConsumerByFirstAndLastname(self, first_name, last_name):
+        cursor = self.conn.cursor()
+        query = "select cid, uid, uname, upass, first_name, last_name, caddress from consumer natural inner join users where first_name = %s and last_name = %s;"
+        cursor.execute(query, (first_name, last_name))
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result
+
+    def getConsumerByUserAndFirstAndLastnameAndAddress(self, uname, first_name, last_name, caddress):
+        cursor = self.conn.cursor()
+        query = "select cid, uid, uname, upass, first_name, last_name, caddress from consumer natural inner join users where uname = %s and first_name = %s and last_name = %s and caddress = %s;"
+        cursor.execute(query, (uname, first_name, last_name, caddress))
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result
+
+    def getConsumerByUserAndFirstnameAndAddress(self, uname, first_name, caddress):
+        cursor = self.conn.cursor()
+        query = "select cid, uid, uname, upass, first_name, last_name, caddress from consumer natural inner join users where uname = %s and first_name = %s and caddress = %s;"
+        cursor.execute(query, (uname, first_name, caddress))
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result
+
+    def getConsumerByUserAndLastnameAndAddress(self, uname, last_name, caddress):
+        cursor = self.conn.cursor()
+        query = "select cid, uid, uname, upass, first_name, last_name, caddress from consumer natural inner join users where uname = %s and last_name = %s and caddress = %s;"
+        cursor.execute(query, (uname, last_name, caddress))
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result
+
+    def getConsumerByFirstAndLastnameAndAddress(self, first_name, last_name, caddress):
+        cursor = self.conn.cursor()
+        query = "select cid, uid, uname, upass, first_name, last_name, caddress from consumer natural inner join users where first_name = %s and last_name = %s and caddress = %s;"
+        cursor.execute(query, (first_name, last_name, caddress))
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result
+
+    def getConsumerByFirstnameAndAddress(self, first_name, caddress):
+        cursor = self.conn.cursor()
+        query = "select cid, uid, uname, upass, first_name, last_name, caddress from consumer natural inner join users where first_name = %s and caddress = %s;"
+        cursor.execute(query, (first_name, caddress))
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result
+
+    def getConsumerByLastnameAndAddress(self, last_name, caddress):
+        cursor = self.conn.cursor()
+        query = "select cid, uid, uname, upass, first_name, last_name, caddress from consumer natural inner join users where last_name = %s and caddress = %s;"
+        cursor.execute(query, (last_name, caddress))
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result
+
+    def getConsumerByUsernameAndAddress(self, uname, caddress):
+        cursor = self.conn.cursor()
+        query = "select cid, uid, uname, upass, first_name, last_name, caddress from consumer natural inner join users where uname = %s and caddress = %s;"
+        cursor.execute(query, (uname, caddress))
         result = []
         for row in cursor:
             result.append(row)
@@ -37,127 +181,9 @@ class ConsumerDAO:
         self.conn.commit()
         return uid
 
-    #
-    # def getUserById(self, uid):
-    #     cursor = self.conn.cursor()
-    #     query = "select * from users where uid = %s;"
-    #     cursor.execute(query, (uid,))
-    #     result = []
-    #     for row in cursor:
-    #         result.append(row)
-    #     return result
-    #
-    # def getUserByUsername(self, uname):
-    #     cursor = self.conn.cursor()
-    #     query = "select * from users where uname = %s;"
-    #     cursor.execute(query, (uname,))
-    #     result = []
-    #     for row in cursor:
-    #         result.append(row)
-    #     return result
-    #
-    # def getUserByFirstname(self, first_name):
-    #     cursor = self.conn.cursor()
-    #     query = "select * from users where first_name = %s;"
-    #     cursor.execute(query, (first_name,))
-    #     result = []
-    #     for row in cursor:
-    #         result.append(row)
-    #     return result
-    #
-    # def getUserByLastname(self, last_name):
-    #     cursor = self.conn.cursor()
-    #     query = "select * from users where last_name = %s;"
-    #     cursor.execute(query, (last_name,))
-    #     result = []
-    #     for row in cursor:
-    #         result.append(row)
-    #     return result
-    #
-    # def getUserByUserAndFirstAndLastname(self, uname, first_name, last_name):
-    #     cursor = self.conn.cursor()
-    #     query = "select * from users where uname = %s and first_name = %s and last_name = %s;"
-    #     cursor.execute(query, (uname, first_name, last_name))
-    #     result = []
-    #     for row in cursor:
-    #         result.append(row)
-    #     return result
-    #
-    # def getUserByUserAndFirstname(self, uname, first_name):
-    #     cursor = self.conn.cursor()
-    #     query = "select * from users where uname = %s and first_name = %s;"
-    #     cursor.execute(query, (uname, first_name))
-    #     result = []
-    #     for row in cursor:
-    #         result.append(row)
-    #     return result
-    #
-    # def getUserByUserAndLastname(self, uname, last_name):
-    #     cursor = self.conn.cursor()
-    #     query = "select * from users where uname = %s and last_name = %s;"
-    #     cursor.execute(query, (uname, last_name))
-    #     result = []
-    #     for row in cursor:
-    #         result.append(row)
-    #     return result
-    #
-    # def getUserByFirstAndLastname(self, first_name, last_name):
-    #     cursor = self.conn.cursor()
-    #     query = "select * from users where first_name = %s and last_name = %s;"
-    #     cursor.execute(query, (first_name, last_name))
-    #     result = []
-    #     for row in cursor:
-    #         result.append(row)
-    #     return result
-    #
-    # def addAdminUser(self, utype, uname, upass, first_name, last_name):
-    #     # Create user then call the method for the appropiate type of user to create that
-    #     # type as well
-    #     if utype == 'Administrator':
-    #         cursor = self.conn.cursor()
-    #         query = '''INSERT INTO users(uname, upass, first_name, last_name)
-    #                         VALUES(%s, %s, %s, %s) Returning uid;'''
-    #         uid = cursor.execute(query, (uname, upass, first_name, last_name))
-    #         self.conn.commit()
-    #         if uid:
-    #             # call the method for administrators
-    #             return uid
-    #         else:
-    #             return None
-    #     else:
-    #         return None
-    #
-    # def addRegularUser(self, utype, uname, upass, first_name, last_name):
-    #     # Create user then call the method for the appropiate type of user to create that
-    #     # type as well
-    #     if utype == 'Consumer' or utype == 'Supplier':
-    #         cursor = self.conn.cursor()
-    #         query = '''INSERT INTO users(uname, upass, first_name, last_name)
-    #                         VALUES(%s, %s, %s, %s);'''
-    #         uid = cursor.execute(query, (uname, upass, first_name, last_name))
-    #         self.conn.commit()
-    #         if uid:
-    #             # call the method for consumer/suppliers
-    #             if utype == 'Consumer':
-    #                 return  # dummy
-    #             else:
-    #                 return  # dummy
-    #             return uid
-    #         else:
-    #             return None
-    #
-    # def deleteUser(self, uid):
-    #     # Gotta delete the supplier/admin/consumer associated with this user.
-    #     # supplier.deleteSupplier()
-    #     cursor = self.conn.cursor()
-    #     query = "delete from user where uid = %s;"
-    #     cursor.execute(query, (uid,))
-    #     self.conn.commit()
-    #     return uid
-    #
-    # def update(self, uid, uname, upass, first_name, last_name):
-    #     cursor = self.conn.cursor()
-    #     query = "update users set uname = %s, upass = %s, first_name = %s, last_name = %s where uid = %s;"
-    #     cursor.execute(query, (uname, upass, first_name, last_name, uid,))
-    #     self.conn.commit()
-    #     return uid
+    def update(self, uid, caddress):
+        cursor = self.conn.cursor()
+        query = "update consumer set saddress = %s where uid = %s;"
+        cursor.execute(query, (caddress, uid))
+        self.conn.commit()
+        return uid

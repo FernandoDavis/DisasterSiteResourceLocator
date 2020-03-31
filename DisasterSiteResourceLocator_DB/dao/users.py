@@ -34,7 +34,7 @@ class UsersDAO:
 
     def getAllUsers(self):
         cursor = self.conn.cursor()
-        query = "select * from users;"
+        query = "select uid, uname, upass, first_name, last_name from users;"
         cursor.execute(query)
         result = []
         for row in cursor:
@@ -43,7 +43,7 @@ class UsersDAO:
 
     def getUserById(self, uid):
         cursor = self.conn.cursor()
-        query = "select * from users where uid = %s;"
+        query = "select uid, uname, upass, first_name, last_name from users where uid = %s;"
         cursor.execute(query, (uid,))
         result = []
         for row in cursor:
@@ -52,7 +52,7 @@ class UsersDAO:
 
     def getUserByUsername(self, uname):
         cursor = self.conn.cursor()
-        query = "select * from users where uname = %s;"
+        query = "select uid, uname, upass, first_name, last_name from users where uname = %s;"
         cursor.execute(query, (uname,))
         result = []
         for row in cursor:
@@ -61,7 +61,7 @@ class UsersDAO:
 
     def getUserByFirstname(self, first_name):
         cursor = self.conn.cursor()
-        query = "select * from users where first_name = %s;"
+        query = "select uid, uname, upass, first_name, last_name from users where first_name = %s;"
         cursor.execute(query, (first_name,))
         result = []
         for row in cursor:
@@ -70,7 +70,7 @@ class UsersDAO:
 
     def getUserByLastname(self, last_name):
         cursor = self.conn.cursor()
-        query = "select * from users where last_name = %s;"
+        query = "select uid, uname, upass, first_name, last_name from users where last_name = %s;"
         cursor.execute(query, (last_name,))
         result = []
         for row in cursor:
@@ -79,7 +79,7 @@ class UsersDAO:
 
     def getUserByUserAndFirstAndLastname(self, uname, first_name, last_name):
         cursor = self.conn.cursor()
-        query = "select * from users where uname = %s and first_name = %s and last_name = %s;"
+        query = "select uid, uname, upass, first_name, last_name from users where uname = %s and first_name = %s and last_name = %s;"
         cursor.execute(query, (uname, first_name, last_name))
         result = []
         for row in cursor:
@@ -88,7 +88,7 @@ class UsersDAO:
 
     def getUserByUserAndFirstname(self, uname, first_name):
         cursor = self.conn.cursor()
-        query = "select * from users where uname = %s and first_name = %s;"
+        query = "select uid, uname, upass, first_name, last_name from users where uname = %s and first_name = %s;"
         cursor.execute(query, (uname, first_name))
         result = []
         for row in cursor:
@@ -97,7 +97,7 @@ class UsersDAO:
 
     def getUserByUserAndLastname(self, uname, last_name):
         cursor = self.conn.cursor()
-        query = "select * from users where uname = %s and last_name = %s;"
+        query = "select uid, uname, upass, first_name, last_name from users where uname = %s and last_name = %s;"
         cursor.execute(query, (uname, last_name))
         result = []
         for row in cursor:
@@ -106,7 +106,7 @@ class UsersDAO:
 
     def getUserByFirstAndLastname(self, first_name, last_name):
         cursor = self.conn.cursor()
-        query = "select * from users where first_name = %s and last_name = %s;"
+        query = "select uid, uname, upass, first_name, last_name from users where first_name = %s and last_name = %s;"
         cursor.execute(query, (first_name, last_name))
         result = []
         for row in cursor:
@@ -154,15 +154,16 @@ class UsersDAO:
         return None
 
     def deleteUser(self, uid, utype):
+        result = None
         if utype == "Consumer":
-            dao = ConsumerDAO
-            result = dao.deleteConsumer()
+            dao = ConsumerDAO()
+            result = dao.deleteConsumer(uid)
         if utype == "Supplier":
-            dao = SupplierDAO
-            result = dao.deleteSupplier()
+            dao = SupplierDAO()
+            result = dao.deleteSupplier(uid)
         if utype == "Administrator":
-            dao = AdministratorDAO
-            result = dao.deleteAdministrator()
+            dao = AdministratorDAO()
+            result = dao.deleteAdministrator(uid)
         if result:
             cursor = self.conn.cursor()
             query = "delete from user where uid = %s;"

@@ -1,6 +1,7 @@
 from flask import Flask, jsonify, request
 
 from handler.administrator import AdministratorHandler
+from handler.billinginformation import BillingInformationHandler
 from handler.consumer import ConsumerHandler
 from handler.order import OrderHandler
 from handler.request import RequestHandler
@@ -305,6 +306,38 @@ def getReservedById(rnumber):
 def getSupplyByReservedId(rnumber):
     return ReservedHandler().getSupplyByReservedId(rnumber)
 
+@app.route('/DSRLApp/users/billinginformation', methods=['GET', 'POST'])
+def getAllBillingInformation():
+    if request.method == 'POST':
+        if request.json:
+            return BillingInformationHandler().insertBillingInformation(request.json)
+        else:
+            return jsonify(Error="No order was provided.")
+    else:
+        if not request.args:
+            return BillingInformationHandler().getAllBillingInformation()
+        else:
+            return BillingInformationHandler().searchBillingInformation(request.args)
+
+
+@app.route('/DSRLApp/users/billinginformation/<int:bid>', methods=['GET', 'PUT', 'DELETE'])
+def getBillingInformationById(bid):
+    if request.method == 'GET':
+        return BillingInformationHandler().getBillingInformationById(bid)
+    elif request.method == 'PUT':
+        if request.json:
+            return BillingInformationHandler().updateBillingInformation(bid, request.args)
+        else:
+            return jsonify(Error="No attributes were provided."), 404
+    elif request.method == 'DELETE':
+        return BillingInformationHandler().deleteBillingInformation(bid)
+    else:
+        return jsonify(Error="Method not allowed."), 405
+
+
+@app.route('/DSRLApp/users/<int:uid>/billinginformation')
+def getBillingInformationByUserId(uid):
+    return BillingInformationHandler().getBillingInformationByUserId(uid)
 
 if __name__ == '__main__':
     app.run()

@@ -504,6 +504,7 @@ ALTER TABLE ONLY public.users ALTER COLUMN uid SET DEFAULT nextval('public.users
 --
 
 COPY public.administrator (aid, uid) FROM stdin;
+3	17
 \.
 
 
@@ -511,7 +512,7 @@ COPY public.administrator (aid, uid) FROM stdin;
 -- Name: administrator_aid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.administrator_aid_seq', 1, false);
+SELECT pg_catalog.setval('public.administrator_aid_seq', 3, true);
 
 
 --
@@ -554,7 +555,7 @@ COPY public.category (catid, cattype) FROM stdin;
 -- Name: category_catid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.category_catid_seq', 13, true);
+SELECT pg_catalog.setval('public.category_catid_seq', 14, true);
 
 
 --
@@ -563,6 +564,7 @@ SELECT pg_catalog.setval('public.category_catid_seq', 13, true);
 
 COPY public.consumer (cid, caddress, uid) FROM stdin;
 1	anotheraddress	2
+2		18
 \.
 
 
@@ -570,7 +572,7 @@ COPY public.consumer (cid, caddress, uid) FROM stdin;
 -- Name: consumer_cid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.consumer_cid_seq', 1, true);
+SELECT pg_catalog.setval('public.consumer_cid_seq', 2, true);
 
 
 --
@@ -646,6 +648,7 @@ SELECT pg_catalog.setval('public.resource_resid_seq', 5, true);
 
 COPY public.supplier (sid, saddress, uid) FROM stdin;
 1	someaddress	1
+4	an address	13
 \.
 
 
@@ -653,7 +656,7 @@ COPY public.supplier (sid, saddress, uid) FROM stdin;
 -- Name: supplier_sid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.supplier_sid_seq', 1, true);
+SELECT pg_catalog.setval('public.supplier_sid_seq', 4, true);
 
 
 --
@@ -681,6 +684,9 @@ SELECT pg_catalog.setval('public.supply_suid_seq', 3, true);
 COPY public.users (uid, uname, upass, first_name, last_name) FROM stdin;
 2	another@gmail.com	Password	Jose	Tua
 1	fdavis	password	Fernando	Davis
+13	test	password	test	test
+17	somename	password	awdafad	awdafea
+18	a name	password	some	last
 \.
 
 
@@ -688,7 +694,7 @@ COPY public.users (uid, uname, upass, first_name, last_name) FROM stdin;
 -- Name: users_uid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.users_uid_seq', 3, true);
+SELECT pg_catalog.setval('public.users_uid_seq', 18, true);
 
 
 --

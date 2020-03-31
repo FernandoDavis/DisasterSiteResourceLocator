@@ -2,7 +2,9 @@ from flask import Flask, jsonify, request
 
 from handler.administrator import AdministratorHandler
 from handler.consumer import ConsumerHandler
+from handler.order import OrderHandler
 from handler.request import RequestHandler
+from handler.reserved import ReservedHandler
 from handler.supplier import SupplierHandler
 from handler.supply import SupplyHandler
 from handler.users import UsersHandler
@@ -202,8 +204,6 @@ def getSupplyById(suid):
 def getResourceBySupplyId(suid):
     return SupplyHandler().getResourceBySupplyId(suid)
 
-#####################################
-
 @app.route('/DSRLApp/requests', methods=['GET', 'POST'])
 def getAllRequests():
     if request.method == 'POST':
@@ -238,71 +238,73 @@ def getResourceByRequestId(reqid):
     return RequestHandler().getResourceByRequestId(reqid)
 
 
-# @app.route('/PartApp/requested', methods=['GET', 'POST'])
-# def getAllResourcesRequested():
-#     if request.method == 'POST':
-#         # cambie a request.json pq el form no estaba bregando
-#         # parece q estaba poseido por satanas ...
-#         # DEBUG a ver q trae el json q manda el cliente con la nueva pieza
-#         print("REQUEST: ", request.json)
-#         return PartHandler().insertPartJson(request.json)
-#     else:
-#         if not request.args:
-#             return PartHandler().getAllResourcesRequested()
-#         else:
-#             return PartHandler().searchParts(request.args)
-#
-# @app.route('/PartApp/parts', methods=['GET', 'POST'])
-# def getAllParts():
-#     if request.method == 'POST':
-#         # cambie a request.json pq el form no estaba bregando
-#         # parece q estaba poseido por satanas ...
-#         # DEBUG a ver q trae el json q manda el cliente con la nueva pieza
-#         print("REQUEST: ", request.json)
-#         return PartHandler().insertPartJson(request.json)
-#     else:
-#         if not request.args:
-#             return PartHandler().getAllParts()
-#         else:
-#             return PartHandler().searchParts(request.args)
-#
-# @app.route('/PartApp/parts/<int:pid>', methods=['GET', 'PUT', 'DELETE'])
-# def getPartById(pid):
-#     if request.method == 'GET':
-#         return PartHandler().getPartById(pid)
-#     elif request.method == 'PUT':
-#         return PartHandler().updatePart(pid, request.form)
-#     elif request.method == 'DELETE':
-#         return PartHandler().deletePart(pid)
-#     else:
-#         return jsonify(Error="Method not allowed."), 405
-#
-# @app.route('/PartApp/parts/<int:pid>/suppliers')
-# def getSuppliersByPartId(pid):
-#     return PartHandler().getSuppliersByPartId(pid)
-#
+@app.route('/DSRLApp/orders', methods=['GET', 'POST'])
+def getAllOrders():
+    if request.method == 'POST':
+        if request.json:
+            return OrderHandler().insertOrder(request.json)
+        else:
+            return jsonify(Error="No order was provided.")
+    else:
+        if not request.args:
+            return OrderHandler().getAllOrders()
+        else:
+            return OrderHandler().searchOrder(request.args)
 
-#
-# @app.route('/PartApp/suppliers/<int:sid>',
-#            methods=['GET', 'PUT', 'DELETE'])
-# def getSupplierById(sid):
-#     if request.method == 'GET':
-#         return SupplierHandler().getSupplierById(sid)
-#     elif request.method == 'PUT':
-#         pass
-#     elif request.method == 'DELETE':
-#         pass
-#     else:
-#         return jsonify(Error = "Method not allowed"), 405
-#
-#
-# @app.route('/PartApp/suppliers/<int:sid>/parts')
-# def getPartsBySuplierId(sid):
-#     return SupplierHandler().getPartsBySupplierId(sid)
-#
-# @app.route('/PartApp/parts/countbypartid')
-# def getCountByPartId():
-#     return PartHandler().getCountByPartId()
+
+@app.route('/DSRLApp/orders/<int:onumber>', methods=['GET', 'PUT', 'DELETE'])
+def getOrderById(onumber):
+    if request.method == 'GET':
+        return OrderHandler().getOrderById(onumber)
+    elif request.method == 'PUT':
+        if request.json:
+            return OrderHandler().updateOrder(onumber, request.args)
+        else:
+            return jsonify(Error="No attributes were provided."), 404
+    elif request.method == 'DELETE':
+        return OrderHandler().deleteOrder(onumber)
+    else:
+        return jsonify(Error="Method not allowed."), 405
+
+
+@app.route('/DSRLApp/orders/<int:onumber>/supply')
+def getSupplyByOrderId(onumber):
+    return OrderHandler().getSupplyByOrderId(onumber)
+
+
+@app.route('/DSRLApp/reserved', methods=['GET', 'POST'])
+def getAllReserved():
+    if request.method == 'POST':
+        if request.json:
+            return ReservedHandler().insertReserved(request.json)
+        else:
+            return jsonify(Error="No order was provided.")
+    else:
+        if not request.args:
+            return ReservedHandler().getAllReserved()
+        else:
+            return ReservedHandler().searchReserved(request.args)
+
+
+@app.route('/DSRLApp/reserved/<int:rnumber>', methods=['GET', 'PUT', 'DELETE'])
+def getReservedById(rnumber):
+    if request.method == 'GET':
+        return ReservedHandler().getReservedById(rnumber)
+    elif request.method == 'PUT':
+        if request.json:
+            return ReservedHandler().updateReserved(rnumber, request.args)
+        else:
+            return jsonify(Error="No attributes were provided."), 404
+    elif request.method == 'DELETE':
+        return ReservedHandler().deleteReserved(rnumber)
+    else:
+        return jsonify(Error="Method not allowed."), 405
+
+
+@app.route('/DSRLApp/reserved/<int:rnumber>/supply')
+def getSupplyByReservedId(rnumber):
+    return ReservedHandler().getSupplyByReservedId(rnumber)
+
 
 if __name__ == '__main__':
     app.run()

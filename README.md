@@ -8,7 +8,7 @@ pg_dump -U postgres dsrldb < DisasterSiteResourceLocator_DB\dsrldb_backup.sql
 
 # Team Members
 Fernando Davis Rivera  
-Cristian Rivera  
+Cristian Rivera Soto  
 Jose Tua Colon  
 
 # Report

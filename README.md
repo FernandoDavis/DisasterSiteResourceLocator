@@ -1,10 +1,10 @@
 # DisasterSiteResourceLocator_DB
 
 To take full database backup:
-pg_dump -U postgres dsrldb > DisasterSiteResourceLocator_DB\dsrldb_backup.sql
+pg_dump -U postgres dsrldb > DisasterSiteResourceLocator_DB\dsrldb_backup.backup
 
 To restore database backup:
-pg_restore -U postgres dsrldb < DisasterSiteResourceLocator_DB\dsrldb_backup.sql  
+pg_restore --dbname=dsrldb --verbose "DisasterSiteResourceLocator_DB\dsrldb_backup.backup"  
 
 # Team Members
 Fernando Davis Rivera  

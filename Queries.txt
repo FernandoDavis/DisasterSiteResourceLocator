@@ -1,0 +1,471 @@
+/*--------------------------Users--------------------------*/
+INSERT INTO users(
+            uname, upass, first_name, last_name)
+    VALUES ('Bomb', 'db123', 'Alison', 'DeBou');
+
+INSERT INTO users(
+            uname, upass, first_name, last_name)
+    VALUES ('VXDL', 'goya', 'Gabriel', 'Soto');
+
+INSERT INTO users(
+            uname, upass, first_name, last_name)
+    VALUES ('purpetty', 'hair', 'Gabriela', 'Sanchez');
+
+INSERT INTO users(
+            uname, upass, first_name, last_name)
+    VALUES ('catscratch', 'hairball', 'Anne', 'Wettsburg');
+
+INSERT INTO users(
+            uname, upass, first_name, last_name)
+    VALUES ('Sniper', 'thereal', 'Chris', 'Kyle');
+
+INSERT INTO users(
+            uname, upass, first_name, last_name)
+    VALUES ('Taxeslmao', 'smallloan', 'Donald', 'Trump');
+
+INSERT INTO users(
+            uname, upass, first_name, last_name)
+    VALUES ('Taskforce', 'emails', 'Hillary', 'Clinton');
+
+INSERT INTO users(
+            uname, upass, first_name, last_name)
+    VALUES ('Screamface', 'phone', 'Jennete', 'Mcquirk');
+
+INSERT INTO users(
+            uname, upass, first_name, last_name)
+    VALUES ('Mining', 'blocks', 'Minecraft', 'Steve');
+
+INSERT INTO users(
+            uname, upass, first_name, last_name)
+    VALUES ('Demonslayr', 'motorcycl', 'Dante', 'Sparda');
+
+
+INSERT INTO users(
+            uname, upass, first_name, last_name)
+    VALUES ('Javalicious', 'eclipse', 'Eclipse', 'IDE');
+
+
+INSERT INTO users(
+            uname, upass, first_name, last_name)
+    VALUES ('Webman', '123', 'Peter', 'Parker');
+
+
+INSERT INTO users(
+            uname, upass, first_name, last_name)
+    VALUES ('Strongman', 'lift', 'Macho Man', 'Randy Savage');
+
+INSERT INTO users(
+            uname, upass, first_name, last_name)
+    VALUES ('Rider', 'sword', 'Fury', 'Speedrun');
+
+INSERT INTO users(
+            uname, upass, first_name, last_name)
+    VALUES ('Botox', 'death', 'Danny', 'Trejo');
+
+
+INSERT INTO users(
+            uname, upass, first_name, last_name)
+    VALUES ('Zombies', 'movie', 'George', 'Romero');    
+
+
+INSERT INTO users(
+            uname, upass, first_name, last_name)
+    VALUES ('Savior', 'supply', 'Big', 'Daddy');    
+
+
+/*--------------------------Administrators--------------------------*/
+INSERT INTO administrator(uid)
+    VALUES (1);
+
+INSERT INTO administrator(uid)
+    VALUES (23);
+
+INSERT INTO administrator(uid)
+    VALUES (25);
+
+INSERT INTO administrator(uid)
+    VALUES (35);
+
+INSERT INTO administrator(uid)
+    VALUES (29);
+
+INSERT INTO administrator(uid)
+    VALUES (22);
+
+INSERT INTO administrator(uid)
+    VALUES (19);
+
+INSERT INTO administrator(uid)
+    VALUES (43);
+
+INSERT INTO administrator(uid)
+    VALUES (40);
+
+INSERT INTO administrator(uid)
+    VALUES (37);
+
+
+/*--------------------------Category--------------------------*/
+INSERT INTO category(cattype)
+    VALUES ('Baby Wipes');
+
+INSERT INTO category(cattype)
+    VALUES ('Diapers');
+
+INSERT INTO category(cattype)
+    VALUES ('Hand Sanitizer');  
+ 
+INSERT INTO category(cattype)
+    VALUES ('Baby Powder');
+
+INSERT INTO category(cattype)
+    VALUES ('Sterilized Gloves');
+
+INSERT INTO category(cattype)
+    VALUES ('Masks');
+
+INSERT INTO category(cattype)
+    VALUES ('Soap');
+
+INSERT INTO category(cattype)
+    VALUES ('Cleaning Kits');
+
+
+/*--------------------------Billing Information--------------------------*/
+INSERT INTO billinginformation(
+            billing_address, paypal_account, uid)
+    VALUES ('190 Elizabeth Set, Bull County, Toronto, United States, 38122', 'qy13urnjja8@groupbuff.com', '29');
+
+INSERT INTO billinginformation(
+            billing_address, paypal_account, uid)
+    VALUES ('3134  Allison Avenue, Virgin Oil, Virginia, US, 23219', 'qqjx3jlq6ee@powerencry.com', '23');
+
+INSERT INTO billinginformation(
+            billing_address, paypal_account, uid)
+    VALUES ('1626  Ash Avenue, Stlouis, Missouri, US, 63101', 'j29uzkdh51@fakemailgenerator.net', '25');
+
+INSERT INTO billinginformation(
+            billing_address, paypal_account, uid)
+    VALUES ('476  Alexander Avenue, Dublin, California, US, 94568', '40lzklyx002@powerencry.com', '36');
+
+INSERT INTO billinginformation(
+            billing_address, paypal_account, uid)
+    VALUES ('716  Heron Way, Portland, Oregon, US, 97205', 'hbn8em295h@fakemailgenerator.net', '41');
+
+INSERT INTO public.billinginformation(
+            billing_address, paypal_account, uid)
+    VALUES ('3975  Randall Drive, Kohala, Hawaii, US, 96755', 'b6oy5fygioc@yahoo.com', '17');
+
+INSERT INTO billinginformation(
+            billing_address, paypal_account, uid)
+    VALUES ('3300  Edwards Street, Greenville, North Carolina, US, 27834', 'abinmdj5l3v@gmail.com', '40');
+
+INSERT INTO billinginformation(
+            billing_address, paypal_account, uid)
+    VALUES ('Valle Arriba Heights Cll 265 DB23, Carolina, Puerto Rico, 00784', 'wd51lh39i2l@powerencry.com', '35');
+
+INSERT INTO billinginformation(
+            billing_address, paypal_account, uid)
+    VALUES ('Ansgarstr. 4, Wallenhorst, Harweth, Germany, 49134', 'gnsstrld0l@fakemailgenerator.net', '44');
+
+INSERT INTO billinginformation(
+            billing_address, paypal_account, uid)
+    VALUES ('MHA Hood JH Street of Madness, Karten, Great Company, Germany, 125432', '0cqux4jfn4xn@classesmail.com', '1');
+
+INSERT INTO billinginformation(
+            billing_address, paypal_account, uid)
+    VALUES ('3103 10th Ste N Suite 201, Arlington, Virginia, US, 22201', '19sc2nwdbmwh@meantinc.com', '2');
+
+
+/*--------------------------Consumer--------------------------*/
+INSERT INTO consumer(
+            cid, caddress, uid)
+    VALUES ('134', '190 Elizabeth Set, Bull County, Toronto, United States, 38122', '29');
+
+INSERT INTO consumer(
+            cid, caddress, uid)
+    VALUES ('135', '3134  Allison Avenue, Virgin Oil, Virginia, US, 23219', '23');
+
+INSERT INTO consumer(
+            cid, caddress, uid)
+    VALUES ('136', '476  Alexander Avenue, Dublin, California, US, 94568', '36');
+
+INSERT INTO consumer(
+            cid, caddress, uid)
+    VALUES ('137', '716  Heron Way, Portland, Oregon, US, 97205', '41');
+
+INSERT INTO consumer(
+            cid, caddress, uid)
+    VALUES ('138', '3975  Randall Drive, Kohala, Hawaii, US, 96755', '17');
+
+INSERT INTO consumer(
+            cid, caddress, uid)
+    VALUES ('139', '3300  Edwards Street, Greenville, North Carolina, US, 27834', '40');
+
+INSERT INTO consumer(
+            cid, caddress, uid)
+    VALUES ('140', 'Valle Arriba Heights Cll 265 DB23, Carolina, Puerto Rico, 00784', '35');
+
+INSERT INTO consumer(
+            cid, caddress, uid)
+    VALUES ('141', 'Ansgarstr. 4, Wallenhorst, Harweth, Germany, 49134', '44');
+
+INSERT INTO consumer(
+            cid, caddress, uid)
+    VALUES ('142', 'MHA Hood JH Street of Madness, Karten, Great Company, Germany, 125432', '1');
+
+INSERT INTO consumer(
+            cid, caddress, uid)
+    VALUES ('143', '3103 10th Ste N Suite 201, Arlington, Virginia, US, 22201', '2');
+
+INSERT INTO consumer(
+            cid, caddress, uid)
+    VALUES ('144', '1626  Ash Avenue, Stlouis, Missouri, US, 63101', '25');
+
+/*--------------------------Supplier--------------------------*/
+INSERT INTO supplier(
+            saddress, uid, company_name)
+    VALUES ('3103 10th Ste N Suite 201, Arlington, Virginia, US, 22201', '2', 'Verizon');
+
+INSERT INTO supplier(
+            saddress, uid, company_name)
+    VALUES ('1334  Wyatt Street, Boynton Beach, Florida, US, 33436', '46', 'Google');
+
+INSERT INTO supplier(
+            saddress, uid, company_name)
+    VALUES ('1334  Wyatt Street, Boynton Beach, Florida, US, 33436', '24', 'Cats Inc.');
+
+INSERT INTO supplier(
+            saddress, uid, company_name)
+    VALUES ('3134  Allison Avenue, Virgin Oil, Virginia, US, 374321', '23', 'Spiderz Galore');
+
+INSERT INTO supplier(
+            saddress, uid, company_name)
+    VALUES ('595  Mapleview Drive, Dyersburg, Tennesse, US, 38204', '47', 'Who Cares');
+
+INSERT INTO supplier(
+            saddress, uid, company_name)
+    VALUES ('476  Alexander Avenue, Dublin, California, US, 94568', '36', 'Dublin Roolz');
+
+INSERT INTO supplier(
+            saddress, uid, company_name)
+    VALUES ('3300  Edwards Street, Greenville, North Carolina, US, 27834', '40', 'Green the World');
+
+INSERT INTO supplier(
+            saddress, uid, company_name)
+    VALUES ('476  Alexander Avenue, Dublin, California, US, 94568', '41', 'Dublin Roolz');
+
+INSERT INTO supplier(
+            saddress, uid, company_name)
+    VALUES ('3103 10th Ste N Suite 201, Arlington, Virginia, US, 22201', '39', 'Verizon');
+
+INSERT INTO supplier(
+            saddress, uid, company_name)
+    VALUES ('2656  Pooz Street, Pratts, Virginia, 22731, US', '39', 'Demon Slaying');
+
+INSERT INTO supplier(
+            saddress, uid, company_name)
+    VALUES ('1633  Corpening Drive, Detroit, Michigan, US, 488226', '2', 'Que yo hago aqui');
+
+/*--------------------------Resource--------------------------*/
+INSERT INTO resource(
+            catid, resdescription, resname, reslocation)
+    VALUES ('1', 'Bottled water', '78 Case Pallet of Water', '190 Elizabeth Set, Bull County, Toronto, United States');
+
+INSERT INTO resource(
+            catid, resdescription, resname, reslocation)
+    VALUES ('2', 'Cardiac medications', 'Esential medicine for the heart', 'China');
+
+INSERT INTO resource(
+            catid, resdescription, resname, reslocation)
+    VALUES ('3', 'Baby food & formula', '80 Pcs of baby food & formula', 'United States');
+
+INSERT INTO resource(
+            catid, resdescription, resname, reslocation)
+    VALUES ('4', 'Canned food items', 'Beans, soup, spam, etc.', '190 Elizabeth Set, Bull County, Toronto, United States');
+
+INSERT INTO resource(
+            catid, resdescription, resname, reslocation)
+    VALUES ('5', 'Food with water removed to prolong food', 'Dried food items', '3134  Allison Avenue, Virgin Oil, Virginia, US, 374321');
+
+INSERT INTO resource(
+            catid, resdescription, resname, reslocation)
+    VALUES ('6', 'Ice packs', 'Gel ice pack compress', '595  Mapleview Drive, Dyersburg, Tennesse, US, 38204');
+
+INSERT INTO resource(
+            catid, resdescription, resname, reslocation)
+    VALUES ('7', 'Liquid fuel for diesel engines', 'Diesel Fuel', '2656  Pooz Street, Pratts, Virginia, 22731, US');
+
+INSERT INTO resource(
+            catid, resdescription, resname, reslocation)
+    VALUES ('8', 'Infusion pumpp for fluids, medications or nutrients', 'Infusion pump', 'China');
+
+INSERT INTO resource(
+            catid, resdescription, resname, reslocation)
+    VALUES ('8', 'Pacemakers', 'Pacemakers for those in need.', 'China');
+
+INSERT INTO resource(
+            catid, resdescription, resname, reslocation)
+    VALUES ('16', 'Diapers', '156 Pcs of dry diapers', '476  Alexander Avenue, Dublin, California, US, 94568');
+
+INSERT INTO resource(
+            catid, resdescription, resname, reslocation)
+    VALUES ('13', 'Alkaline Batteries', 'Battery cells for external devices', '408 Park Ave, Brooklyn, NY 11205, United State, 841452');
+
+/*--------------------------Request--------------------------*/
+INSERT INTO request(
+            cid, resid)
+    VALUES ('134', '1');
+
+INSERT INTO request(
+            cid, resid, reqquantity)
+    VALUES ('135', '1', '3');
+
+INSERT INTO request(
+            cid, resid)
+    VALUES ('136', '2');
+
+INSERT INTO request(
+            cid, resid, reqquantity)
+    VALUES ('137', '16', '2');
+
+INSERT INTO request(
+            cid, resid, reqquantity)
+    VALUES ('137', '27', '10');
+
+INSERT INTO request(
+            cid, resid, reqquantity)
+    VALUES ('138', '23', '5');
+
+INSERT INTO request(
+            cid, resid)
+    VALUES ('142', '23');
+    
+INSERT INTO request(
+            cid, resid)
+    VALUES ('144', '22');
+
+INSERT INTO request(
+            cid, resid, reqquantity)
+    VALUES ('137', '24', '150');
+
+INSERT INTO request(
+            cid, resid, reqquantity)
+    VALUES ('134', '23', '20');
+
+INSERT INTO request(
+            cid, resid)
+    VALUES ('141', '27');
+
+INSERT INTO request(
+            cid, resid)
+    VALUES ('142', '24');
+
+/*--------------------------Supply--------------------------*/
+INSERT INTO supply(
+            sid, resid, suprice, suquantity)
+    VALUES ('13', '1', '20.00', '20');
+
+INSERT INTO supply(
+            sid, resid, suprice, suquantity)
+    VALUES ('15', '1', '15.00', '30');
+
+INSERT INTO supply(
+            sid, resid, suprice, suquantity)
+    VALUES ('5', '15', '17.00', '15');
+
+INSERT INTO supply(
+            sid, resid, suprice, suquantity)
+    VALUES ('8', '23', '150.00', '120');
+
+INSERT INTO supply(
+            sid, resid, suprice, suquantity)
+    VALUES ('7', '22', '10.00', '130');
+
+INSERT INTO supply(
+            sid, resid, suprice, suquantity)
+    VALUES ('10', '22', '7.00', '200');
+
+INSERT INTO supply(
+            sid, resid, suprice, suquantity)
+    VALUES ('9', '15', '45.00', '90');
+
+INSERT INTO supply(
+            sid, resid, suprice, suquantity)
+    VALUES ('8', '14', '20.00', '50');
+
+INSERT INTO supply(
+            sid, resid, suprice, suquantity)
+    VALUES ('14', '19', '25.00', '400');
+
+INSERT INTO supply(
+            sid, resid, suprice, suquantity)
+    VALUES ('6', '24', '250.00', '25');
+    
+INSERT INTO supply(
+            sid, resid, suprice, suquantity)
+    VALUES ('15', '26', '10.00', '220');
+
+/*--------------------------Order--------------------------*/
+INSERT INTO "order"(
+            cid, uid, suid, sid, oquantity, odate_delivered)
+    VALUES ('18', ?, ?, ?, ?, ?);
+
+INSERT INTO "order"(
+            cid, uid, suid, sid, oquantity, odate_delivered)
+    VALUES ('29', ?, ?, ?, ?, ?);
+
+INSERT INTO "order"(
+            cid, uid, suid, sid, oquantity, odate_delivered)
+    VALUES ('18', ?, ?, ?, ?, ?);
+
+INSERT INTO "order"(
+            cid, uid, suid, sid, oquantity, odate_delivered)
+    VALUES ('35', ?, ?, ?, ?, ?);
+
+INSERT INTO "order"(
+            cid, uid, suid, sid, oquantity, odate_delivered)
+    VALUES ('44', ?, ?, ?, ?, ?);
+
+INSERT INTO "order"(
+            cid, uid, suid, sid, oquantity, odate_delivered)
+    VALUES ('25', ?, ?, ?, ?, ?);
+
+INSERT INTO "order"(
+            cid, uid, suid, sid, oquantity, odate_delivered)
+    VALUES ('2', ?, ?, ?, ?, ?);
+
+INSERT INTO "order"(
+            cid, uid, suid, sid, oquantity, odate_delivered)
+    VALUES ('40', ?, ?, ?, ?, ?);
+
+INSERT INTO "order"(
+            cid, uid, suid, sid, oquantity, odate_delivered)
+    VALUES ('23', ?, ?, ?, ?, ?);
+
+INSERT INTO "order"(
+            cid, uid, suid, sid, oquantity, odate_delivered)
+    VALUES ('35', ?, ?, ?, ?, ?);
+
+INSERT INTO "order"(
+            cid, uid, suid, sid, oquantity, odate_delivered)
+    VALUES ('1', ?, ?, ?, ?, ?);
+
+INSERT INTO "order"(
+            cid, uid, suid, sid, oquantity, odate_delivered)
+    VALUES ('36', ?, ?, ?, ?, ?);
+
+INSERT INTO "order"(
+            cid, uid, suid, sid, oquantity, odate_delivered)
+    VALUES ('44', ?, ?, ?, ?, ?);
+
+
+/*--------------------------Reservation--------------------------*/
+
+
+/*--------------------------Transaction--------------------------*/
+
+
+
+
+

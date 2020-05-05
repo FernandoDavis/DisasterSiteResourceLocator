@@ -165,21 +165,22 @@ ALTER SEQUENCE public.consumer_cid_seq OWNED BY public.consumer.cid;
 
 
 --
--- Name: orderedsupply; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+-- Name: order; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
-CREATE TABLE public.orderedsupply (
+CREATE TABLE public."order" (
     onumber integer NOT NULL,
     cid integer NOT NULL,
     uid integer NOT NULL,
     suid integer NOT NULL,
     sid integer NOT NULL,
-    odate date DEFAULT now() NOT NULL,
-    oquantity integer NOT NULL
+    odate_ordered date DEFAULT now() NOT NULL,
+    oquantity integer NOT NULL,
+    odate_delivered date
 );
 
 
-ALTER TABLE public.orderedsupply OWNER TO postgres;
+ALTER TABLE public."order" OWNER TO postgres;
 
 --
 -- Name: orderedsupply_onumber_seq; Type: SEQUENCE; Schema: public; Owner: postgres
@@ -199,7 +200,7 @@ ALTER TABLE public.orderedsupply_onumber_seq OWNER TO postgres;
 -- Name: orderedsupply_onumber_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
-ALTER SEQUENCE public.orderedsupply_onumber_seq OWNED BY public.orderedsupply.onumber;
+ALTER SEQUENCE public.orderedsupply_onumber_seq OWNED BY public."order".onumber;
 
 
 --
@@ -211,7 +212,8 @@ CREATE TABLE public.request (
     cid integer NOT NULL,
     resid integer NOT NULL,
     is_void boolean DEFAULT false NOT NULL,
-    reqdate date DEFAULT now() NOT NULL
+    reqdate date DEFAULT now() NOT NULL,
+    reqquantity integer DEFAULT 1 NOT NULL
 );
 
 
@@ -239,21 +241,22 @@ ALTER SEQUENCE public.request_reqid_seq OWNED BY public.request.reqid;
 
 
 --
--- Name: reservedsupply; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+-- Name: reservation; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
-CREATE TABLE public.reservedsupply (
+CREATE TABLE public.reservation (
     rnumber integer NOT NULL,
-    rdate date DEFAULT now() NOT NULL,
+    rdate_reserved date DEFAULT now() NOT NULL,
     rquantity integer NOT NULL,
     cid integer NOT NULL,
     uid integer NOT NULL,
     suid integer NOT NULL,
-    sid integer NOT NULL
+    sid integer NOT NULL,
+    rdate_delivered date
 );
 
 
-ALTER TABLE public.reservedsupply OWNER TO postgres;
+ALTER TABLE public.reservation OWNER TO postgres;
 
 --
 -- Name: reservedsupply_rnumber_seq; Type: SEQUENCE; Schema: public; Owner: postgres
@@ -273,7 +276,7 @@ ALTER TABLE public.reservedsupply_rnumber_seq OWNER TO postgres;
 -- Name: reservedsupply_rnumber_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
-ALTER SEQUENCE public.reservedsupply_rnumber_seq OWNED BY public.reservedsupply.rnumber;
+ALTER SEQUENCE public.reservedsupply_rnumber_seq OWNED BY public.reservation.rnumber;
 
 
 --
@@ -320,7 +323,8 @@ ALTER SEQUENCE public.resource_resid_seq OWNED BY public.resource.resid;
 CREATE TABLE public.supplier (
     sid integer NOT NULL,
     saddress character varying(100) NOT NULL,
-    uid integer NOT NULL
+    uid integer NOT NULL,
+    company_name character varying(50)
 );
 
 
@@ -384,6 +388,44 @@ ALTER TABLE public.supply_suid_seq OWNER TO postgres;
 --
 
 ALTER SEQUENCE public.supply_suid_seq OWNED BY public.supply.suid;
+
+
+--
+-- Name: transaction; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE public.transaction (
+    tid integer NOT NULL,
+    ttype character(1),
+    billing_address character varying(100) NOT NULL,
+    paypal_account character varying(50),
+    bid integer NOT NULL,
+    cid integer NOT NULL,
+    sid integer NOT NULL
+);
+
+
+ALTER TABLE public.transaction OWNER TO postgres;
+
+--
+-- Name: transaction_tid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.transaction_tid_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.transaction_tid_seq OWNER TO postgres;
+
+--
+-- Name: transaction_tid_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.transaction_tid_seq OWNED BY public.transaction.tid;
 
 
 --
@@ -454,7 +496,7 @@ ALTER TABLE ONLY public.consumer ALTER COLUMN cid SET DEFAULT nextval('public.co
 -- Name: onumber; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY public.orderedsupply ALTER COLUMN onumber SET DEFAULT nextval('public.orderedsupply_onumber_seq'::regclass);
+ALTER TABLE ONLY public."order" ALTER COLUMN onumber SET DEFAULT nextval('public.orderedsupply_onumber_seq'::regclass);
 
 
 --
@@ -468,7 +510,7 @@ ALTER TABLE ONLY public.request ALTER COLUMN reqid SET DEFAULT nextval('public.r
 -- Name: rnumber; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY public.reservedsupply ALTER COLUMN rnumber SET DEFAULT nextval('public.reservedsupply_rnumber_seq'::regclass);
+ALTER TABLE ONLY public.reservation ALTER COLUMN rnumber SET DEFAULT nextval('public.reservedsupply_rnumber_seq'::regclass);
 
 
 --
@@ -490,6 +532,13 @@ ALTER TABLE ONLY public.supplier ALTER COLUMN sid SET DEFAULT nextval('public.su
 --
 
 ALTER TABLE ONLY public.supply ALTER COLUMN suid SET DEFAULT nextval('public.supply_suid_seq'::regclass);
+
+
+--
+-- Name: tid; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.transaction ALTER COLUMN tid SET DEFAULT nextval('public.transaction_tid_seq'::regclass);
 
 
 --
@@ -576,10 +625,10 @@ SELECT pg_catalog.setval('public.consumer_cid_seq', 2, true);
 
 
 --
--- Data for Name: orderedsupply; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: order; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.orderedsupply (onumber, cid, uid, suid, sid, odate, oquantity) FROM stdin;
+COPY public."order" (onumber, cid, uid, suid, sid, odate_ordered, oquantity, odate_delivered) FROM stdin;
 \.
 
 
@@ -594,9 +643,9 @@ SELECT pg_catalog.setval('public.orderedsupply_onumber_seq', 1, false);
 -- Data for Name: request; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.request (reqid, cid, resid, is_void, reqdate) FROM stdin;
-1	1	2	f	2020-03-22
-2	1	5	f	2020-03-23
+COPY public.request (reqid, cid, resid, is_void, reqdate, reqquantity) FROM stdin;
+1	1	2	f	2020-03-22	1
+2	1	5	f	2020-03-23	1
 \.
 
 
@@ -608,10 +657,10 @@ SELECT pg_catalog.setval('public.request_reqid_seq', 2, true);
 
 
 --
--- Data for Name: reservedsupply; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: reservation; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.reservedsupply (rnumber, rdate, rquantity, cid, uid, suid, sid) FROM stdin;
+COPY public.reservation (rnumber, rdate_reserved, rquantity, cid, uid, suid, sid, rdate_delivered) FROM stdin;
 \.
 
 
@@ -646,9 +695,7 @@ SELECT pg_catalog.setval('public.resource_resid_seq', 5, true);
 -- Data for Name: supplier; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.supplier (sid, saddress, uid) FROM stdin;
-1	someaddress	1
-4	an address	13
+COPY public.supplier (sid, saddress, uid, company_name) FROM stdin;
 \.
 
 
@@ -664,9 +711,6 @@ SELECT pg_catalog.setval('public.supplier_sid_seq', 4, true);
 --
 
 COPY public.supply (suid, sid, resid, is_void, is_reserved, suprice, sudate, suquantity) FROM stdin;
-1	1	1	f	f	1.5	2020-03-22	15
-2	1	3	f	f	4.5	2020-03-22	3
-3	1	4	f	f	1	2020-03-22	50
 \.
 
 
@@ -675,6 +719,21 @@ COPY public.supply (suid, sid, resid, is_void, is_reserved, suprice, sudate, suq
 --
 
 SELECT pg_catalog.setval('public.supply_suid_seq', 3, true);
+
+
+--
+-- Data for Name: transaction; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.transaction (tid, ttype, billing_address, paypal_account, bid, cid, sid) FROM stdin;
+\.
+
+
+--
+-- Name: transaction_tid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.transaction_tid_seq', 1, false);
 
 
 --
@@ -757,7 +816,7 @@ ALTER TABLE ONLY public.consumer
 -- Name: orderedsupply_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
-ALTER TABLE ONLY public.orderedsupply
+ALTER TABLE ONLY public."order"
     ADD CONSTRAINT orderedsupply_pkey PRIMARY KEY (onumber);
 
 
@@ -781,7 +840,7 @@ ALTER TABLE ONLY public.request
 -- Name: reservedsupply_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
-ALTER TABLE ONLY public.reservedsupply
+ALTER TABLE ONLY public.reservation
     ADD CONSTRAINT reservedsupply_pkey PRIMARY KEY (rnumber);
 
 
@@ -823,6 +882,14 @@ ALTER TABLE ONLY public.supply
 
 ALTER TABLE ONLY public.supply
     ADD CONSTRAINT supply_suid_key UNIQUE (suid);
+
+
+--
+-- Name: transaction_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY public.transaction
+    ADD CONSTRAINT transaction_pkey PRIMARY KEY (tid);
 
 
 --
@@ -869,7 +936,7 @@ ALTER TABLE ONLY public.consumer
 -- Name: orderedsupply_cid_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY public.orderedsupply
+ALTER TABLE ONLY public."order"
     ADD CONSTRAINT orderedsupply_cid_fkey FOREIGN KEY (cid, uid) REFERENCES public.consumer(cid, uid);
 
 
@@ -877,7 +944,7 @@ ALTER TABLE ONLY public.orderedsupply
 -- Name: orderedsupply_suid_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY public.orderedsupply
+ALTER TABLE ONLY public."order"
     ADD CONSTRAINT orderedsupply_suid_fkey FOREIGN KEY (suid, sid) REFERENCES public.supply(suid, sid);
 
 
@@ -901,7 +968,7 @@ ALTER TABLE ONLY public.request
 -- Name: reservedsupply_cid_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY public.reservedsupply
+ALTER TABLE ONLY public.reservation
     ADD CONSTRAINT reservedsupply_cid_fkey FOREIGN KEY (cid, uid) REFERENCES public.consumer(cid, uid);
 
 
@@ -909,7 +976,7 @@ ALTER TABLE ONLY public.reservedsupply
 -- Name: reservedsupply_suid_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY public.reservedsupply
+ALTER TABLE ONLY public.reservation
     ADD CONSTRAINT reservedsupply_suid_fkey FOREIGN KEY (suid, sid) REFERENCES public.supply(suid, sid);
 
 

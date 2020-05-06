@@ -421,44 +421,44 @@ ELSE
 END IF;
 
 INSERT INTO consumer(
-            cid, caddress, uid)
-    VALUES ('134', '190 Elizabeth Set, Bull County, Toronto, United States, 38122', '2');
+            caddress, uid)
+    VALUES ('190 Elizabeth Set, Bull County, Toronto, United States, 38122', '2');
 
 INSERT INTO consumer(
-            cid, caddress, uid)
-    VALUES ('135', '3134  Allison Avenue, Virgin Oil, Virginia, US, 23219', '4');
+            caddress, uid)
+    VALUES ('3134  Allison Avenue, Virgin Oil, Virginia, US, 23219', '4');
 
 INSERT INTO consumer(
-            cid, caddress, uid)
-    VALUES ('136', '476  Alexander Avenue, Dublin, California, US, 94568', '6');
+            caddress, uid)
+    VALUES ('476  Alexander Avenue, Dublin, California, US, 94568', '6');
 
 INSERT INTO consumer(
-            cid, caddress, uid)
-    VALUES ('137', '716  Heron Way, Portland, Oregon, US, 97205', '8');
+            caddress, uid)
+    VALUES ('716  Heron Way, Portland, Oregon, US, 97205', '8');
 
 INSERT INTO consumer(
-            cid, caddress, uid)
-    VALUES ('138', '3975  Randall Drive, Kohala, Hawaii, US, 96755', '10');
+            caddress, uid)
+    VALUES ('3975  Randall Drive, Kohala, Hawaii, US, 96755', '10');
 
 INSERT INTO consumer(
-            cid, caddress, uid)
-    VALUES ('139', '3300  Edwards Street, Greenville, North Carolina, US, 27834', '12');
+            caddress, uid)
+    VALUES ('3300  Edwards Street, Greenville, North Carolina, US, 27834', '12');
 
 INSERT INTO consumer(
-            cid, caddress, uid)
-    VALUES ('140', 'Valle Arriba Heights Cll 265 DB23, Carolina, Puerto Rico, 00784', '14');
+            caddress, uid)
+    VALUES ('Valle Arriba Heights Cll 265 DB23, Carolina, Puerto Rico, 00784', '14');
 
 INSERT INTO consumer(
-            cid, caddress, uid)
-    VALUES ('141', 'Ansgarstr. 4, Wallenhorst, Harweth, Germany, 49134', '16');
+            caddress, uid)
+    VALUES ('Ansgarstr. 4, Wallenhorst, Harweth, Germany, 49134', '16');
 
 INSERT INTO consumer(
-            cid, caddress, uid)
-    VALUES ('142', 'MHA Hood JH Street of Madness, Karten, Great Company, Germany, 125432', '18');
+            caddress, uid)
+    VALUES ('MHA Hood JH Street of Madness, Karten, Great Company, Germany, 125432', '18');
 
 INSERT INTO consumer(
-            cid, caddress, uid)
-    VALUES ('143', '3103 10th Ste N Suite 201, Arlington, Virginia, US, 22201', '20');
+            caddress, uid)
+    VALUES ('3103 10th Ste N Suite 201, Arlington, Virginia, US, 22201', '20');
 
 END $$;  -- Ends consumer data update.   
 
@@ -564,7 +564,6 @@ ELSE
 		);
 		ALTER TABLE resource
 		  OWNER TO postgres;
-
 END IF;
 
 INSERT INTO resource(
@@ -611,160 +610,484 @@ INSERT INTO resource(
             catid, resdescription, resname, reslocation)
     VALUES ('15', 'Diapers', '156 Pcs of dry diapers', '476 Alexander Avenue, Dublin, California, US, 94568');
 
+INSERT INTO resource(
+            catid, resdescription, resname, reslocation)
+    VALUES ('2', 'Pain medication', 'Aspirin', '1303  Virgil Street, Lynn Haven, Florida, US, 32444');
+
+INSERT INTO resource(
+            catid, resdescription, resname, reslocation)
+    VALUES ('2', 'Heart medication', 'Coumadin', '1385  Cost Avenue, Bethesda, Maryland, US, 20817');
+
+INSERT INTO resource(
+            catid, resdescription, resname, reslocation)
+    VALUES ('2', 'Anticoagulant', 'Plavix', '2766  Burnside Avenue, Park City, Utah, US, 84060');
+
+INSERT INTO resource(
+            catid, resdescription, resname, reslocation)
+    VALUES ('8', 'Pacemakers for the heart', 'Pacemakers', '3607  Hillhaven Drive, Independence, Missouri, US, 64058');
+
+INSERT INTO resource(
+            catid, resdescription, resname, reslocation)
+    VALUES ('8', 'Artificial hearts', 'Total Artificial Hearts', '3607  Hillhaven Drive, Independence, Missouri, US, 64058');
+
+INSERT INTO resource(
+            catid, resdescription, resname, reslocation)
+    VALUES ('2', 'Pain medication', 'Codeine', '1303  Virgil Street, Lynn Haven, Florida, US, 32444');
+
+INSERT INTO resource(
+            catid, resdescription, resname, reslocation)
+    VALUES ('2', 'Medication for high blood pressures', 'Norvasc', '2898  Oakwood Circle, San Clemente, California, US, 92672');
+
+INSERT INTO resource(
+            catid, resdescription, resname, reslocation)
+    VALUES ('9', 'Mercedes Arocs 4142-B Concrete Mixer Truck', 'Concrete Mixer', '1568  Shadowmar Drive, EOLA, Texas, US, 76937, 394123');
+
+INSERT INTO resource(
+            catid, resdescription, resname, reslocation)
+    VALUES ('9', 'Caterpillar 428F2 4x4 Backhoe Loader - 2017', 'Backhoe Loader', '1568  Shadowmar Drive, EOLA, Texas, US, 76937, 394123');
+
+INSERT INTO resource(
+            catid, resdescription, resname, reslocation)
+    VALUES ('9', 'Komatsu HD605-8 Rigid Dump Truck', 'Mining Dumptruck', '1568  Shadowmar Drive, EOLA, Texas, US, 76937, 394123');
+
+INSERT INTO resource(
+            catid, resdescription, resname, reslocation)
+    VALUES ('9', 'Toyota 8FDF30', 'Forklift', '1568  Shadowmar Drive, EOLA, Texas, US, 76937, 394123');
+
+INSERT INTO resource(
+            catid, resdescription, resname, reslocation)
+    VALUES ('9', 'CY1715 Road Roller', 'Road Roller', '1568  Shadowmar Drive, EOLA, Texas, US, 76937, 394123');
+
+INSERT INTO resource(
+            catid, resdescription, resname, reslocation)
+    VALUES ('9', 'Liebherr LFT 1060-4.1 Crane', 'Truck Mounted Crane', '1568  Shadowmar Drive, EOLA, Texas, US, 76937, 394123');
+
+INSERT INTO resource(
+            catid, resdescription, resname, reslocation)
+    VALUES ('10','Industrial Electric Drill', 'Electric Power Drill', '4762  Par Drive, Goleta, California, US, 93117');
+
+INSERT INTO resource(
+            catid, resdescription, resname, reslocation)
+    VALUES ('10', 'Circular woodworking buzzsaw', 'Electric Buzzsaw', '4762  Par Drive, Goleta, California, US, 93117');
+
+INSERT INTO resource(
+            catid, resdescription, resname, reslocation)
+    VALUES ('8', 'Powerheart AED G3 PLUS defib unit', 'Defibrillator Unit', '2158  Sharon Lane, Plymouth, Indiana, US, 46563');
+
+INSERT INTO resource(
+            catid, resdescription, resname, reslocation)
+    VALUES ('8', 'China AG-HxJ02 Respirator Machine', 'Oxygen Respirator Machine', 'China');
+
+INSERT INTO resource(
+            catid, resdescription, resname, reslocation)
+    VALUES ('14', 'All purpose cleaning supply kit for households', 'Cleaning Kits', '476 Alexander Avenue, Dublin, California, US, 94568');
+
+INSERT INTO resource(
+            catid, resdescription, resname, reslocation)
+    VALUES ('15', 'Dove Body Wash Deep Moisture', 'Bodywash', 'China');
+
+INSERT INTO resource(
+            catid, resdescription, resname, reslocation)
+    VALUES ('12', '8000 Wat Gasoline Powered Portable Generator', 'Portable Electric Generator', '4658 Kerry Way Gardena, California, US, 90248');
+
+INSERT INTO resource(
+            catid, resdescription, resname, reslocation)
+    VALUES ('11', 'One size fits all clothes', 'Shirts and pants', '3300  Edwards Street, Greenville, North Carolina, US, 27834');
+
+INSERT INTO resource(
+            catid, resdescription, resname, reslocation)
+    VALUES ('11', 'Underwear for men and women', 'Undergarments', '3300  Edwards Street, Greenville, North Carolina, US, 27834');
+
+INSERT INTO resource(
+            catid, resdescription, resname, reslocation)
+    VALUES ('13', 'Eveready AA4 12 pack batteries', 'Super Heavy Duty Batteries', '408 Park Ave, Brooklyn, NY 11205, United State, 841452');
+
+INSERT INTO resource(
+            catid, resdescription, resname, reslocation)
+    VALUES ('15', 'No bleed pls sanitary products for womanz', 'Pads and tampons', 'Scotland Forever 402 Park, Scotland, Europe, 498313');
+
+INSERT INTO resource(
+            catid, resdescription, resname, reslocation)
+    VALUES ('15', 'Poopoo cleaning uh oh stinky', 'Butt Wipper', 'Scotland Forever 402 Park, Scotland, Europe, 498313');
+
+
 END $$;  -- Ends resource data update.
 
 /*--------------------------Request--------------------------*/
+
+DO $$ BEGIN
+
+-- If table is not found creates it, else truncates it.
+IF EXISTS ( SELECT 1 FROM information_schema.tables  WHERE table_schema = 'public' AND table_name = 'request') THEN
+	TRUNCATE TABLE request
+	Restart identity
+	Cascade;
+ELSE
+	CREATE TABLE request
+		(
+		  reqid serial NOT NULL,
+		  cid integer NOT NULL,
+		  resid integer NOT NULL,
+		  is_void boolean NOT NULL DEFAULT false,
+		  reqdate date NOT NULL DEFAULT now(),
+		  reqquantity integer NOT NULL DEFAULT 1,
+		  CONSTRAINT request_pkey PRIMARY KEY (reqid, cid),
+		  CONSTRAINT request_cid_fkey FOREIGN KEY (cid)
+		      REFERENCES consumer (cid) MATCH SIMPLE
+		      ON UPDATE NO ACTION ON DELETE NO ACTION,
+		  CONSTRAINT request_resid_fkey FOREIGN KEY (resid)
+		      REFERENCES resource (resid) MATCH SIMPLE
+		      ON UPDATE NO ACTION ON DELETE NO ACTION,
+		  CONSTRAINT request_reqid_key UNIQUE (reqid)
+		)
+		WITH (
+		  OIDS=FALSE
+		);
+		ALTER TABLE request
+		  OWNER TO postgres;
+END IF;
+
 INSERT INTO request(
             cid, resid)
-    VALUES ('134', '1');
+    VALUES ('1', '1');
 
 INSERT INTO request(
             cid, resid, reqquantity)
-    VALUES ('135', '1', '3');
+    VALUES ('2', '1', '3');
 
 INSERT INTO request(
             cid, resid)
-    VALUES ('136', '2');
+    VALUES ('3', '2');
 
 INSERT INTO request(
             cid, resid, reqquantity)
-    VALUES ('137', '16', '2');
+    VALUES ('4', '16', '2');
 
 INSERT INTO request(
             cid, resid, reqquantity)
-    VALUES ('137', '27', '10');
+    VALUES ('4', '27', '10');
 
 INSERT INTO request(
             cid, resid, reqquantity)
-    VALUES ('138', '23', '5');
+    VALUES ('5', '23', '5');
 
 INSERT INTO request(
             cid, resid)
-    VALUES ('142', '23');
+    VALUES ('6', '23');
     
 INSERT INTO request(
             cid, resid)
-    VALUES ('144', '22');
+    VALUES ('7', '22');
 
 INSERT INTO request(
             cid, resid, reqquantity)
-    VALUES ('137', '24', '150');
+    VALUES ('8', '24', '150');
 
 INSERT INTO request(
             cid, resid, reqquantity)
-    VALUES ('134', '23', '20');
+    VALUES ('9', '23', '20');
 
 INSERT INTO request(
             cid, resid)
-    VALUES ('141', '27');
+    VALUES ('4', '27');
 
 INSERT INTO request(
             cid, resid)
-    VALUES ('142', '24');
+    VALUES ('2', '24');
+
+END $$;  -- Ends request data update.
 
 /*--------------------------Supply--------------------------*/
-INSERT INTO supply(
-            sid, resid, suprice, suquantity)
-    VALUES ('13', '1', '20.00', '20');
+
+DO $$ BEGIN
+
+-- If table is not found creates it, else truncates it.
+IF EXISTS ( SELECT 1 FROM information_schema.tables  WHERE table_schema = 'public' AND table_name = 'supply') THEN
+	TRUNCATE TABLE supply
+	Restart identity
+	Cascade;
+ELSE
+	CREATE TABLE supply
+		(
+		  suid serial NOT NULL,
+		  sid integer NOT NULL,
+		  resid integer NOT NULL,
+		  is_void boolean NOT NULL DEFAULT false,
+		  is_available boolean NOT NULL DEFAULT false,
+		  suprice double precision NOT NULL,
+		  sudate date NOT NULL DEFAULT now(),
+		  suquantity integer NOT NULL,
+		  CONSTRAINT supply_pkey PRIMARY KEY (suid, sid),
+		  CONSTRAINT supply_resid_fkey FOREIGN KEY (resid)
+		      REFERENCES resource (resid) MATCH SIMPLE
+		      ON UPDATE NO ACTION ON DELETE NO ACTION,
+		  CONSTRAINT supply_sid_fkey FOREIGN KEY (sid)
+		      REFERENCES supplier (sid) MATCH SIMPLE
+		      ON UPDATE NO ACTION ON DELETE NO ACTION,
+		  CONSTRAINT supply_suid_key UNIQUE (suid)
+		)
+		WITH (
+		  OIDS=FALSE
+		);
+		ALTER TABLE supply
+		  OWNER TO postgres;
+END IF;
 
 INSERT INTO supply(
             sid, resid, suprice, suquantity)
-    VALUES ('15', '1', '15.00', '30');
+    VALUES ('1', '1', '20.00', '20');
 
 INSERT INTO supply(
             sid, resid, suprice, suquantity)
-    VALUES ('5', '15', '17.00', '15');
+    VALUES ('1', '1', '15.00', '30');
 
 INSERT INTO supply(
             sid, resid, suprice, suquantity)
-    VALUES ('8', '23', '150.00', '120');
+    VALUES ('1', '15', '17.00', '15');
 
 INSERT INTO supply(
             sid, resid, suprice, suquantity)
-    VALUES ('7', '22', '10.00', '130');
+    VALUES ('5', '23', '150.00', '120');
 
 INSERT INTO supply(
-            sid, resid, suprice, suquantity)
-    VALUES ('10', '22', '7.00', '200');
+            sid, resid, is_available, suprice, suquantity)
+    VALUES ('7', '22', 't', '10.00', '130');
 
 INSERT INTO supply(
-            sid, resid, suprice, suquantity)
-    VALUES ('9', '15', '45.00', '90');
+            sid, resid, is_available, suprice, suquantity)
+    VALUES ('1', '1', 't', '20.00', '20');
 
 INSERT INTO supply(
-            sid, resid, suprice, suquantity)
-    VALUES ('8', '14', '20.00', '50');
+            sid, resid, is_available, suprice, suquantity)
+    VALUES ('9', '17', 't', '50.00', '45');
 
 INSERT INTO supply(
-            sid, resid, suprice, suquantity)
-    VALUES ('14', '19', '25.00', '400');
+            sid, resid, is_available, suprice, suquantity)
+    VALUES ('2', '16', 't', '350.00', '20');
 
 INSERT INTO supply(
-            sid, resid, suprice, suquantity)
-    VALUES ('6', '24', '250.00', '25');
-    
+            sid, resid, is_available, suprice, suquantity)
+    VALUES ('5', '18', 't', '50.00', '65');
+
 INSERT INTO supply(
-            sid, resid, suprice, suquantity)
-    VALUES ('15', '26', '10.00', '220');
+            sid, resid, is_available, suprice, suquantity)
+    VALUES ('2', '19', 't', '5000.00', '500');
+
+INSERT INTO supply(
+            sid, resid, is_available, suprice, suquantity)
+    VALUES ('1', '20', 't', '4000.00', '200');
+
+INSERT INTO supply(
+            sid, resid, is_available, suprice, suquantity)
+    VALUES ('7', '21', 't', '3000.00', '600');
+
+INSERT INTO supply(
+            sid, resid, is_available, suprice, suquantity)
+    VALUES ('7', '22', 't', '350.00', '100');
+
+INSERT INTO supply(
+            sid, resid, is_available, suprice, suquantity)
+    VALUES ('7', '23', 't', '1500.00', '50');
+
+INSERT INTO supply(
+            sid, resid, is_available, suprice, suquantity)
+    VALUES ('7', '24', 't', '7384.00', '20');
+
+INSERT INTO supply(
+            sid, resid, is_available, suprice, suquantity)
+    VALUES ('8', '34', 't', '20.00', '400');
+
+INSERT INTO supply(
+            sid, resid, is_available, suprice, suquantity)
+    VALUES ('10', '26', 't', '250.00', '150');
+
+INSERT INTO supply(
+            sid, resid, is_available, suprice, suquantity)
+    VALUES ('7', '25', 't', '69.00', '50');
+
+INSERT INTO supply(
+            sid, resid, is_available, suprice, suquantity)
+    VALUES ('2', '6', 't', '7.00', '85');
+
+INSERT INTO supply(
+            sid, resid, is_available, suprice, suquantity)
+    VALUES ('4', '5', 't', '40.00', '56');
+
+INSERT INTO supply(
+            sid, resid, is_available, suprice, suquantity)
+    VALUES ('3', '31', 't', '90.00', '32');
+
+INSERT INTO supply(
+            sid, resid, is_available, suprice, suquantity)
+    VALUES ('1', '30', 't', '4.50', '81');
+
+INSERT INTO supply(
+            sid, resid, is_available, suprice, suquantity)
+    VALUES ('7', '3', 't', '39.00', '62');
+
+INSERT INTO supply(
+            sid, resid, is_available, suprice, suquantity)
+    VALUES ('8', '35', 't', '6.90', '69');
+
+INSERT INTO supply(
+            sid, resid, is_available, suprice, suquantity)
+    VALUES ('8', '36', 't', '6.90', '69');
+
+END $$;  -- Ends supply data update.
 
 /*--------------------------Order--------------------------*/
-select * from users natural inner join consumer;
 
-INSERT INTO Order(
-            cid, uid, suid, sid, oquantity, odate_delivered)
-    VALUES ('18', ?, ?, ?, ?, ?);
+DO $$ BEGIN
 
-INSERT INTO "order"(
-            cid, uid, suid, sid, oquantity, odate_delivered)
-    VALUES ('29', ?, ?, ?, ?, ?);
-
-INSERT INTO "order"(
-            cid, uid, suid, sid, oquantity, odate_delivered)
-    VALUES ('18', ?, ?, ?, ?, ?);
-
-INSERT INTO "order"(
-            cid, uid, suid, sid, oquantity, odate_delivered)
-    VALUES ('35', ?, ?, ?, ?, ?);
-
-INSERT INTO "order"(
-            cid, uid, suid, sid, oquantity, odate_delivered)
-    VALUES ('44', ?, ?, ?, ?, ?);
-
-INSERT INTO "order"(
-            cid, uid, suid, sid, oquantity, odate_delivered)
-    VALUES ('25', ?, ?, ?, ?, ?);
-
-INSERT INTO "order"(
-            cid, uid, suid, sid, oquantity, odate_delivered)
-    VALUES ('2', ?, ?, ?, ?, ?);
-
-INSERT INTO "order"(
-            cid, uid, suid, sid, oquantity, odate_delivered)
-    VALUES ('40', ?, ?, ?, ?, ?);
-
-INSERT INTO "order"(
-            cid, uid, suid, sid, oquantity, odate_delivered)
-    VALUES ('23', ?, ?, ?, ?, ?);
+-- If table is not found creates it, else truncates it.
+IF EXISTS ( SELECT 1 FROM information_schema.tables  WHERE table_schema = 'public' AND table_name = 'order') THEN
+	TRUNCATE TABLE "order"
+	Restart identity
+	Cascade;
+ELSE
+	CREATE TABLE "order"
+		(
+		  onumber integer NOT NULL DEFAULT nextval('orderedsupply_onumber_seq'::regclass),
+		  cid integer NOT NULL,
+		  uid integer NOT NULL,
+		  suid integer NOT NULL,
+		  sid integer NOT NULL,
+		  odate_ordered date NOT NULL DEFAULT now(),
+		  oquantity integer NOT NULL,
+		  odate_delivered date,
+		  CONSTRAINT orderedsupply_pkey PRIMARY KEY (onumber),
+		  CONSTRAINT orderedsupply_cid_fkey FOREIGN KEY (cid, uid)
+		      REFERENCES consumer (cid, uid) MATCH SIMPLE
+		      ON UPDATE NO ACTION ON DELETE NO ACTION,
+		  CONSTRAINT orderedsupply_suid_fkey FOREIGN KEY (suid, sid)
+		      REFERENCES supply (suid, sid) MATCH SIMPLE
+		      ON UPDATE NO ACTION ON DELETE NO ACTION
+		)
+		WITH (
+		  OIDS=FALSE
+		);
+		ALTER TABLE "order"
+		  OWNER TO postgres;
+END IF;
 
 INSERT INTO "order"(
             cid, uid, suid, sid, oquantity, odate_delivered)
-    VALUES ('35', ?, ?, ?, ?, ?);
+    VALUES ('2', '4', '15', '7', '10', '2020-05-06');
 
 INSERT INTO "order"(
             cid, uid, suid, sid, oquantity, odate_delivered)
-    VALUES ('1', ?, ?, ?, ?, ?);
+    VALUES ('2', '4', '3', '1', '20', '2020-05-10');
 
 INSERT INTO "order"(
             cid, uid, suid, sid, oquantity, odate_delivered)
-    VALUES ('36', ?, ?, ?, ?, ?);
+    VALUES ('1', '2', '1', '1', '10', '2020-05-07');
 
 INSERT INTO "order"(
             cid, uid, suid, sid, oquantity, odate_delivered)
-    VALUES ('44', ?, ?, ?, ?, ?);
+    VALUES ('4', '8', '5', '7', '50', '2020-05-06');
 
+INSERT INTO "order"(
+            cid, uid, suid, sid, oquantity, odate_delivered)
+    VALUES ('3', '6', '5', '7', '50', '2020-05-09');
+
+INSERT INTO "order"(
+            cid, uid, suid, sid, oquantity, odate_delivered)
+    VALUES ('5', '10', '18', '7', '20', '2020-05-08');
+
+INSERT INTO "order"(
+            cid, uid, suid, sid, oquantity, odate_delivered)
+    VALUES ('8', '16', '21', '3', '32', '2020-05-11');
+
+INSERT INTO "order"(
+            cid, uid, suid, sid, oquantity, odate_delivered)
+    VALUES ('10', '20', '3', '1', '15', '2020-05-06');
+
+INSERT INTO "order"(
+            cid, uid, suid, sid, oquantity, odate_delivered)
+    VALUES ('9', '18', '25', '8', '69', '2020-05-06');
+
+INSERT INTO "order"(
+            cid, uid, suid, sid, oquantity, odate_delivered)
+    VALUES ('7', '14', '23', '7', '40', '2020-05-06');
+
+END $$;  -- Ends order data update.
 
 /*--------------------------Reservation--------------------------*/
 
+DO $$ BEGIN
+
+-- If table is not found creates it, else truncates it.
+IF EXISTS ( SELECT 1 FROM information_schema.tables  WHERE table_schema = 'public' AND table_name = 'reservation') THEN
+	TRUNCATE TABLE reservation
+	Restart identity
+	Cascade;
+ELSE
+	CREATE TABLE reservation
+		(
+		  rnumber integer NOT NULL DEFAULT nextval('reservedsupply_rnumber_seq'::regclass),
+		  rdate_reserved date NOT NULL DEFAULT now(),
+		  rquantity integer NOT NULL,
+		  cid integer NOT NULL,
+		  uid integer NOT NULL,
+		  suid integer NOT NULL,
+		  sid integer NOT NULL,
+		  rdate_delivered date,
+		  CONSTRAINT reservedsupply_pkey PRIMARY KEY (rnumber),
+		  CONSTRAINT reservedsupply_cid_fkey FOREIGN KEY (cid, uid)
+		      REFERENCES consumer (cid, uid) MATCH SIMPLE
+		      ON UPDATE NO ACTION ON DELETE NO ACTION,
+		  CONSTRAINT reservedsupply_suid_fkey FOREIGN KEY (suid, sid)
+		      REFERENCES supply (suid, sid) MATCH SIMPLE
+		      ON UPDATE NO ACTION ON DELETE NO ACTION
+		)
+		WITH (
+		  OIDS=FALSE
+		);
+		ALTER TABLE reservation
+		  OWNER TO postgres;
+END IF;
+
+INSERT INTO reservation(
+            rquantity, cid, uid, suid, sid, rdate_delivered)
+    VALUES ('20', '1', '2', '2', '1', '2020-05-06');
+
+INSERT INTO reservation(
+            rquantity, cid, uid, suid, sid, rdate_delivered)
+    VALUES ('50', '2', '4', '17', '10', '2020-05-06');
+
+INSERT INTO reservation(
+            rquantity, cid, uid, suid, sid, rdate_delivered)
+    VALUES ('20', '3', '6', '9', '5', '2020-05-06');
+
+INSERT INTO reservation(
+            rquantity, cid, uid, suid, sid, rdate_delivered)
+    VALUES ('10', '4', '8', '11', '1', '2020-05-06');
+
+INSERT INTO reservation(
+            rquantity, cid, uid, suid, sid, rdate_delivered)
+    VALUES ('5', '4', '8', '16', '8', '2020-05-06');
+
+INSERT INTO reservation(
+            rquantity, cid, uid, suid, sid, rdate_delivered)
+    VALUES ('30', '6', '12', '21', '3', '2020-05-07');
+
+INSERT INTO reservation(
+            rquantity, cid, uid, suid, sid, rdate_delivered)
+    VALUES ('400', '9', '18', '13', '7', '2020-05-07');
+
+INSERT INTO reservation(
+            rquantity, cid, uid, suid, sid, rdate_delivered)
+    VALUES ('150', '9', '18', '25', '8', '2020-05-08');
+
+INSERT INTO reservation(
+            rquantity, cid, uid, suid, sid, rdate_delivered)
+    VALUES ('40', '9', '18', '23', '7', '2020-05-09');
+
+INSERT INTO reservation(
+            rquantity, cid, uid, suid, sid, rdate_delivered)
+    VALUES ('69', '10', '20', '1', '1', '2020-05-10');
+
+END $$;  -- Ends reservation data update.
 
 /*--------------------------Transaction--------------------------*/
 

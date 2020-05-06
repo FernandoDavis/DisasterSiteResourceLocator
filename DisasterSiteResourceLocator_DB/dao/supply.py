@@ -45,10 +45,11 @@ class SupplyDAO:
             result.append(row)
         return result
 
-    def getResourceBySupplyId(self, reqid):
+
+    def getResourceBySupplyId(self, suid):
         cursor = self.conn.cursor()
-        query = "select suid, sid, is_void, is_available, suprice, sudate, suquantity, resid, catid, resname, resdescription, reslocation from supply natural inner join resource where reqid = %s order by resname;"
-        cursor.execute(query, (reqid,))
+        query = "select resid, catid, resname, resdescription, reslocation from supply natural inner join resource where suid = %s order by resname;"
+        cursor.execute(query, (suid,))
         result = []
         for row in cursor:
             result.append(row)

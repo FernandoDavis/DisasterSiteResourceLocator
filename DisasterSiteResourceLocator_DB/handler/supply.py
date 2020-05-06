@@ -66,7 +66,7 @@ class SupplyHandler:
 
     def getResourceBySupplyId(self, suid):
         dao = SupplyDAO()
-        row = dao.getResourceByRequestId(suid)
+        row = dao.getResourceBySupplyId(suid)
         if not row:
             return jsonify(Error="Supply Not Found"), 404
         else:

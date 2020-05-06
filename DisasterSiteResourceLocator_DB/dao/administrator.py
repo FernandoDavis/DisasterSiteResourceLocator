@@ -12,8 +12,17 @@ class AdministratorDAO:
 
     def getAllAdministrators(self):
         cursor = self.conn.cursor()
-        query = "select aid, uname, first_name, last_name from administrator natural inner join users;"
+        query = "select aid, uid, uname, upass, first_name, last_name from administrator natural inner join users;"
         cursor.execute(query)
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result
+
+    def getAdministratorById(self, aid):
+        cursor = self.conn.cursor()
+        query = "select aid, uid, uname, upass, first_name, last_name from administrator natural inner join users where aid = %s;"
+        cursor.execute(query, (aid,))
         result = []
         for row in cursor:
             result.append(row)

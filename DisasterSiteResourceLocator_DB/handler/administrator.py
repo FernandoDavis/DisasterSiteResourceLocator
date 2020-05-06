@@ -1,5 +1,6 @@
 from flask import jsonify
-from dao.supplier import SupplierDAO
+
+from dao.administrator import AdministratorDAO
 
 
 class AdministratorHandler:
@@ -15,31 +16,25 @@ class AdministratorHandler:
         return result
 
     def getAllAdministrators(self):
-        # dao = SupplierDAO()
-        # supplier_list = dao.getAllSuppliers()
-        # result_list = []
-        # for row in supplier_list:
-        #     result = self.build_supplier_dict(row)
-        #     result_list.append(result)
-        # return jsonify(Suppliers=result_list)
-        result = self.build_administrator_dict((1, 3, "Grandpa", "password", "Gabriel", "Soto"))
-        return jsonify(Administrator=result)
+        dao = AdministratorDAO()
+        supplier_list = dao.getAllAdministrators()
+        result_list = []
+        for row in supplier_list:
+            result = self.build_administrator_dict(row)
+            result_list.append(result)
+        return jsonify(Administrator=result_list)
 
     def getAdministratorById(self, aid):
-        # dao = ConsumerDAO()
-        # row = dao.getConsumerById(cid)
-        # if not row:
-        #     return jsonify(Error="User Not Found"), 404
-        # else:
-        #     result = self.build_consumer_dict(row[0])
-        # return jsonify(Consumer=result)
-        if aid == 1:
-            result = self.build_administrator_dict((1, 3, "Grandpa", "password", "Gabriel", "Soto"))
-            return jsonify(Administrator=result)
+        dao = AdministratorDAO()
+        row = dao.getAdministratorById(aid)
+        if not row:
+            return jsonify(Error="Administrator Not Found"), 404
         else:
-            return jsonify(Error="Administrator not found."), 404
+            result = self.build_administrator_dict(row[0])
+        return jsonify(Administrator=result)
 
     def searchAdministrator(self, args):
+        #Filler code
         result = self.build_administrator_dict((1, 3, "Pa", "password", "Gabriel", "Soto"))
         return jsonify(Administrator=result)
 

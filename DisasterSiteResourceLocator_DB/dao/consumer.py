@@ -174,16 +174,16 @@ class ConsumerDAO:
             return cid
         return None
 
-    def deleteConsumer(self, uid):
+    def deleteConsumer(self, cid):
         cursor = self.conn.cursor()
-        query = "delete from consumer where uid = %s;"
-        cursor.execute(query, (uid,))
+        query = "delete from consumer where cid = %s;"
+        cursor.execute(query, (cid,))
         self.conn.commit()
-        return uid
+        return cid
 
-    def update(self, uid, caddress):
+    def update(self, cid, caddress):
         cursor = self.conn.cursor()
-        query = "update consumer set saddress = %s where uid = %s;"
-        cursor.execute(query, (caddress, uid))
+        query = "update consumer set saddress = %s where cid = %s;"
+        cursor.execute(query, (caddress, cid))
         self.conn.commit()
-        return uid
+        return cid

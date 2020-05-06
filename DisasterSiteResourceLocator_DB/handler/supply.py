@@ -8,14 +8,14 @@ class SupplyHandler:
         result['suid'] = row[0]
         result['sid'] = row[1]
         result['is_void'] = row[2]
-        result['is_reserved'] = row[3]
+        result['is_available'] = row[3]
         result['suprice'] = row[4]
         result['sudate'] = row[5]
         result['suquantity'] = row[6]
         result['resid'] = row[7]
         result['catid'] = row[8]
-        result['resdescription'] = row[9]
-        result['resname'] = row[10]
+        result['resname'] = row[9]
+        result['resdescription'] = row[10]
         result['reslocation'] = row[11]
         return result
 
@@ -23,26 +23,72 @@ class SupplyHandler:
         result = {}
         result['resid'] = row[0]
         result['catid'] = row[1]
-        result['resdescription'] = row[2]
-        result['resname'] = row[3]
+        result['resname'] = row[2]
+        result['resdescription'] = row[3]
         result['reslocation'] = row[4]
         return result
 
-    def getAllSupplies(self):
-        result = self.build_supply_dict((1, 1, 'f', 'f', 1.5, "2020-03-22", 15, 1, 1, "Uncooked rice unopened and available.", "Uncooked rice", "Calle tal"))
-        return jsonify(Supply=result)
+    def getAllSuppliesAvailable(self):
+        dao = SupplyDAO()
+        supply_list = dao.getAllSuppliesAvailable()
+        result_list = []
+        for row in supply_list:
+            result = self.build_supply_dict(row)
+            result_list.append(result)
+        return jsonify(Supply=result_list)
+
+    def getAllSuppliesOrderedOrReserved(self):
+        dao = SupplyDAO()
+        supply_list = dao.getAllSuppliesOrderedOrReserved()
+        result_list = []
+        for row in supply_list:
+            result = self.build_supply_dict(row)
+            result_list.append(result)
+        return jsonify(Supply=result_list)
+
+    def getAllResourcesAvailable(self):
+        dao = SupplyDAO()
+        resource_list = dao.getAllResourcesAvailable()
+        result_list = []
+        for row in resource_list:
+            result = self.build_resource_dict(row)
+            result_list.append(result)
+        return jsonify(Resource=result_list)
 
     def getSupplyById(self, suid):
-        result = self.build_supply_dict((1, 1, 'f', 'f', 1.5, "2020-03-22", 15, 1, 1, "Uncooked rice unopened and available.", "Uncooked rice", "Calle tal"))
+        dao = SupplyDAO()
+        row = dao.getSupplyById(suid)
+        if not row:
+            return jsonify(Error="Supply Not Found"), 404
+        else:
+            result = self.build_supply_dict(row[0])
         return jsonify(Supply=result)
 
     def getResourceBySupplyId(self, suid):
-        result = self.build_resource_dict((1, 1, "Uncooked rice unopened and available.", "Uncooked rice", "Calle tal"))
-        return jsonify(Resource=result)
-
-    def searchSupply(self, args):
-        result = self.build_supply_dict((1, 1, 'f', 'f', 1.5, "2020-03-22", 15, 1, 1, "Uncooked rice in a container.", "Uncooked rice", "Calle tal"))
+        dao = SupplyDAO()
+        row = dao.getResourceByRequestId(suid)
+        if not row:
+            return jsonify(Error="Supply Not Found"), 404
+        else:
+            result = self.build_resource_dict(row[0])
         return jsonify(Supply=result)
+
+    def searchRequest(self, args):
+        resname = args.get("resname")
+        cattype = args.get("cattype")
+        if len(args) == 1 and resname:
+            dao = SupplyDAO()
+            supply_list = dao.getSupplyByResourceName(resname)
+        elif len(args) == 1 and cattype:
+            dao = SupplyDAO()
+            supply_list = dao.getSupplyByCategory(cattype)
+        else:
+            return jsonify(Error="Malformed search string."), 400
+        result_list = []
+        for row in supply_list:
+            result = self.build_supply_dict(row)
+            result_list.append(result)
+        return jsonify(Supply=result_list)
 
     def insertSupply(self, form):
         # if form and len(form) == 7:

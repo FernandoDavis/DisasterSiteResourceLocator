@@ -68,7 +68,7 @@ class RequestHandler:
         if len(args) == 1 and resname:
             dao = RequestDAO()
             request_list = dao.getRequestByResourceName(resname)
-        if len(args) == 1 and cattype:
+        elif len(args) == 1 and cattype:
             dao = RequestDAO()
             request_list = dao.getRequestByCategory(cattype)
         else:

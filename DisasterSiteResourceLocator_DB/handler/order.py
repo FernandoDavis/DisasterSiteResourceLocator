@@ -17,20 +17,58 @@ class OrderHandler:
         return result
 
     def getAllOrders(self):
-        result = self.build_order_dict((1, 1, 1, 1, 1, "2020-03-22", 3))
+        dao = OrderDAO
+        order_list = dao.getAllOrders()
+        result_list = []
+        for row in order_list:
+            result = self.build_request_dict(row)
+            result_list.append(result)
         return jsonify(Order=result)
 
     def getOrderById(self, onumber):
-        result = self.build_order_dict((1, 1, 1, 1, 1, "2020-03-22", 3))
+        dao = OrderDAO()
+        row = dao.getOrdersById(onumber)
+        if not row:
+            return jsonify(Error="Request Not Found"), 404
+        else:
+            result = self.build_request_dict(row[0])
         return jsonify(Order=result)
 
     def getSupplyByOrderId(self, onumber):
-        result = SupplyHandler().getSupplyById(1)
-        return result
+        dao = OrderDAO()
+        row = dao.getSupplyByOrderId(onumber)
+        if not row:
+            return jsonify(Error="Request Not Found"), 404
+        else:
+            result = self.build_request_dict(row[0])
+        return jsonify(Order=result)
+
+    def getOrderByUserId(self, uid):
+        dao = OrderDAO()
+        row = dao.getOrderByUserId(uid)
+        if not row:
+            return jsonify(Error="Request Not Found"), 404
+        else:
+            result = self.build_request_dict(row[0])
+        return jsonify(Order=result)
+
 
     def searchOrder(self, args):
-        result = self.build_order_dict((1, 1, 1, 1, 1, "2020-03-22", 3))
-        return jsonify(Order=result)
+        odate_ordered = args.get("odate_ordered")
+        odate_delivered = args.get("odate_delivered")
+        if len(args) == 1 and odate_ordered:
+            dao = OrderDAO()
+            order_list = dao.getOrderByDateOrdered(odate_ordered)
+        if len(args) == 1 and odate_delivered:
+            dao = OrderDAO()
+            order_list = dao.getRequestByCategory(odate_delivered)
+        else:
+            return jsonify(Error="Malformed search string."), 400
+        result_list = []
+        for row in order_list:
+            result = self.build_request_dict(row)
+            result_list.append(result)
+        return jsonify(Request=result_list)
 
     def insertOrder(self, form):
         result = self.build_order_dict((2, 1, 2, 1, 1, "2020-03-22", 5))

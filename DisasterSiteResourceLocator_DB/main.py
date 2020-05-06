@@ -359,14 +359,12 @@ def getBillingInformationByUserId(uid):
 
 @app.route('/DSRLApp/users/<int:uid>/orders', methods=['GET', 'PUT', 'DELETE'])
 def getOrderByUserId(uid):
-    #fill
-    return jsonify(Error="Method not allowed."), 405
+    return OrderHandler.getOrderByUserId(uid)
 
 
 @app.route('/DSRLApp/users/<int:uid>/requests', methods=['GET', 'PUT', 'DELETE'])
 def getReservedByUserId(uid):
-    #fill
-    return jsonify(Error="Method not allowed."), 405
+    return ReservedHandler.getReservedByUserId(uid)
 
 
 @app.route('/DSRLApp/categories', methods=['GET', 'POST'])

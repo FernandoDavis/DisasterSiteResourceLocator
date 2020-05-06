@@ -1,4 +1,5 @@
 from config.dbconfig import pg_config
+import datetime as dt
 import psycopg2
 
 
@@ -10,23 +11,56 @@ class OrderDAO:
                                                             pg_config['passwd'])
         self.conn = psycopg2._connect(connection_url)
 
-    # def getAllResourcesRequested(self):
-    #     cursor = self.conn.cursor()
-    #     query = "select resname, cattype, resdescription, reslocation, first_name, last_name from request natural inner join resource natural inner join category natural join supplier natural join users;"
-    #     cursor.execute(query)
-    #     result = []
-    #     for row in cursor:
-    #         result.append(row)
-    #     return result
-    #
-    # def insertRequest(self, catid, resdescription, resname, reslocation, sid, suprice, suquantity):
-    #     cursor = self.conn.cursor()
-    #     query = '''with rows as (INSERT INTO resource(catid, resdescription, resname, reslocation) VALUES (1, 'bottled water requested, please', 'Bottled Water', 'another address') Returning resid)
-    #                 INSERT INTO request(cid, resid)
-    #                 VALUES (1, (select resid from rows));'''
-    #     cursor.execute(query, (catid, resdescription, resname, reslocation, sid, suprice, suquantity))
-    #     reqid = cursor.fetchone()[0]
-    #     self.conn.commit()
-    #     return suid
+    def getAllOrders(self):
+        cursor = self.conn.cursor()
+        query = "SELECT onumber, cid, uid, suid, sid, odate_ordered, oquantity, odate_delivered FROM \"order\""
+        cursor.execute(query)
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result
 
+    def getOrderById(self, onumber):
+        cursor = self.conn.cursor()
+        query = "SELECT onumber, cid, uid, suid, sid, odate_ordered, oquantity, odate_delivered FROM \"order\" where onumber = %s"
+        cursor.execute(query, (onumber,))
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result
 
+    def getOrderByUserId(self, uid):
+        cursor = self.conn.cursor()
+        query = "SELECT onumber, cid, uid, suid, sid, odate_ordered, oquantity, odate_delivered FROM \"order\" where uid = %s"
+        cursor.execute(query, (uid,))
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result
+
+    def getSupplyByOrderId(self, onumber):
+        cursor = self.conn.cursor()
+        query = "SELECT suid, sid, resid, is_void, is_reserved, suprice, sudate, suquantity FROM \"order\" NATURAL INNER JOIN supply where onumber = %s"
+        cursor.execute(query, (onumber,))
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result
+
+    def getOrderByDateOrdered(self, odate_ordered):
+        cursor = self.conn.cursor()
+        query = "SELECT onumber, cid, uid, suid, sid, odate_ordered, oquantity, odate_delivered FROM \"order\" where odate_ordered = %s"
+        cursor.execute(query, (dt.date(odate_ordered),))
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result
+
+    def getOrderByDateDelivered(self, odate_delivered):
+        cursor = self.conn.cursor()
+        query = "SELECT onumber, cid, uid, suid, sid, odate_ordered, oquantity, odate_delivered FROM \"order\" where odate_delivered = %s"
+        cursor.execute(query, (dt.date(odate_delivered),))
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result

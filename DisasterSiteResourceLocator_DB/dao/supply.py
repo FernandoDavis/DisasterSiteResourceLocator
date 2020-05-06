@@ -60,7 +60,7 @@ class SupplyDAO:
         cursor = self.conn.cursor()
         query = "select suid, sid, is_void, is_available, suprice, sudate, suquantity, resid, catid, resname, resdescription, reslocation from supply natural inner join resource where resname like %(like)s and is_available = 't' order by resname;"
         data_dict = dict()
-        data_dict['like'] = psycopg2.Binary('%' + resname + '%')
+        data_dict['like'] = '%' + resname + '%'
         cursor.execute(query, data_dict)
         result = []
         for row in cursor:
@@ -69,9 +69,9 @@ class SupplyDAO:
 
     def getSupplyByCategory(self, cattype):
         cursor = self.conn.cursor()
-        query = "select suid, sid, is_void, is_available, suprice, sudate, suquantity, resid, catid, resname, resdescription, reslocation from supply natural inner join resource where cattype like %(like)s and is_available = 't' order by resname;"
+        query = "select suid, sid, is_void, is_available, suprice, sudate, suquantity, resid, catid, resname, resdescription, reslocation from supply natural inner join resource natural inner join category where cattype like %(like)s and is_available = 't' order by resname;"
         data_dict = dict()
-        data_dict['like'] = psycopg2.Binary('%' + cattype + '%')
+        data_dict['like'] = '%' + cattype + '%'
         cursor.execute(query, data_dict)
         result = []
         for row in cursor:

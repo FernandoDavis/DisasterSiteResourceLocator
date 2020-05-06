@@ -17,20 +17,57 @@ class ReservedHandler:
         return result
 
     def getAllReserved(self):
-        result = self.build_reserved_dict((1, 1, 1, 1, 1, "2020-03-22", 3))
-        return jsonify(Reserved=result)
+        dao = ReservedDAO
+        order_list = dao.getAllReserved()
+        result_list = []
+        for row in order_list:
+            result = self.build_request_dict(row)
+            result_list.append(result)
+        return jsonify(Order=result)
 
     def getReservedById(self, rnumber):
-        result = self.build_reserved_dict((1, 1, 1, 1, 1, "2020-03-22", 3))
-        return jsonify(Reserved=result)
+        dao = ReservedDAO()
+        row = dao.getOrdersById(rnumber)
+        if not row:
+            return jsonify(Error="Request Not Found"), 404
+        else:
+            result = self.build_request_dict(row[0])
+        return jsonify(Order=result)
+
+    def getReservedByUserId(self, uid):
+        dao = ReservedDAO()
+        row = dao.getOrdersById(uid)
+        if not row:
+            return jsonify(Error="Request Not Found"), 404
+        else:
+            result = self.build_request_dict(row[0])
+        return jsonify(Order=result)
 
     def getSupplyByReservedId(self, rnumber):
-        result = SupplyHandler().getSupplyById(1)
-        return result
+        dao = ReservedDAO()
+        row = dao.getSupplyByReserveID(rnumber)
+        if not row:
+            return jsonify(Error="Request Not Found"), 404
+        else:
+            result = self.build_request_dict(row[0])
+        return jsonify(Order=result)
 
     def searchReserved(self, args):
-        result = self.build_reserved_dict((1, 1, 1, 1, 1, "2020-03-22", 3))
-        return jsonify(Reserved=result)
+        rdate_ordered = args.get("rdate_ordered")
+        rdate_delivered = args.get("rdate_delivered")
+        if len(args) == 1 and rdate_ordered:
+            dao = ReservedDAO()
+            order_list = dao.getOrderByDateOrdered(rdate_ordered)
+        if len(args) == 1 and rdate_delivered:
+            dao = ReservedDAO()
+            order_list = dao.getRequestByCategory(rdate_delivered)
+        else:
+            return jsonify(Error="Malformed search string."), 400
+        result_list = []
+        for row in order_list:
+            result = self.build_request_dict(row)
+            result_list.append(result)
+        return jsonify(Request=result_list)
 
     def insertReserved(self, form):
         result = self.build_reserved_dict((2, 1, 2, 1, 1, "2020-03-22", 5))

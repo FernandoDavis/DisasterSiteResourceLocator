@@ -12,22 +12,47 @@ class BillingInformationHandler:
         return result
 
     def getAllBillingInformation(self):
-        result = self.build_billing_information_dict((1, "Some address", "account@domain.com", 1))
-        return jsonify(BillingInformation=result)
+        dao = BillingInformationDAO()
+        billing_information_list = dao.getAllBillingInformation()
+        result_list = []
+        for row in billing_information_list:
+            result = self.build_billing_information_dict(row)
+            result_list.append(result)
+        return jsonify(BillingInformation=result_list)
 
     def getBillingInformationById(self, bid):
-        result = self.build_billing_information_dict((1, "Some address", "account@domain.com", 1))
-        return jsonify(BillingInformation=result)
+        dao = BillingInformationDAO()
+        billing_information_list = dao.getBillingInformationById(bid)
+        result_list = []
+        for row in billing_information_list:
+            result = self.build_billing_information_dict(row)
+            result_list.append(result)
+        return jsonify(BillingInformation=result_list)
 
     def getBillingInformationByUserId(self, uid):
-        result = self.build_billing_information_dict((1, "Some address", "account@domain.com", 1))
-        return jsonify(BillingInformation=result)
+        dao = BillingInformationDAO()
+        billing_information_list = dao.getBillingInformationByUserId(uid)
+        result_list = []
+        for row in billing_information_list:
+            result = self.build_billing_information_dict(row)
+            result_list.append(result)
+        return jsonify(BillingInformation=result_list)
 
     def searchBillingInformation(self, args):
-        result = self.build_billing_information_dict((1, "The address", "account@domain.com", 1))
-        return jsonify(BillingInformation=result)
+        paypal_account = args.get("paypal_account")
+        if len(args) == 1 and paypal_account:
+            dao = BillingInformationDAO()
+            billing_information_list = dao.getBillingInformationByPaypal(paypal_account)
+        else:
+            return jsonify(Error="Malformed search string."), 400
+        result_list = []
+        for row in billing_information_list:
+            result = self.build_billing_information_dict(row)
+            result_list.append(result)
+        return jsonify(Request=result_list)
 
     def insertBillingInformation(self, form):
+        # Filler Code
         result = self.build_billing_information_dict((1, "Another address", "account@domain.com", 1))
         return jsonify(BillingInformation=result), 201
 
@@ -36,6 +61,7 @@ class BillingInformationHandler:
         return jsonify(DeleteStatus="OK"), 200
 
     def updateBillingInformation(self, bid, form):
+        # Filler Code
         result = self.build_billing_information_dict((1, "Some address", "account@domain.com", 1))
         return jsonify(BillingInformation=result), 200
 

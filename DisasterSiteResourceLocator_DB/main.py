@@ -2,6 +2,7 @@ from flask import Flask, jsonify, request
 
 from handler.administrator import AdministratorHandler
 from handler.billinginformation import BillingInformationHandler
+from handler.category import CategoryHandler
 from handler.consumer import ConsumerHandler
 from handler.order import OrderHandler
 from handler.request import RequestHandler
@@ -181,9 +182,19 @@ def getAllSupplies():
             return jsonify(Error="No supply was provided.")
     else:
         if not request.args:
-            return SupplyHandler().getAllSupplies()
+            return SupplyHandler().getAllSuppliesAvailable()
         else:
             return SupplyHandler().searchSupply(request.args)
+
+
+@app.route('/DSRLApp/supplies/orderedOrReserved', methods=['GET'])
+def getAllSuppliesOrderedOrReserved():
+    return SupplyHandler().getAllSuppliesOrderedOrReserved()
+
+
+@app.route('/DSRLApp/supplies/resources', methods=['GET'])
+def getAllResourcesAvailable():
+    return SupplyHandler().getAllResourcesAvailable()
 
 
 @app.route('/DSRLApp/supplies/<int:suid>', methods=['GET', 'PUT', 'DELETE'])
@@ -205,6 +216,7 @@ def getSupplyById(suid):
 def getResourceBySupplyId(suid):
     return SupplyHandler().getResourceBySupplyId(suid)
 
+
 @app.route('/DSRLApp/requests', methods=['GET', 'POST'])
 def getAllRequests():
     if request.method == 'POST':
@@ -217,6 +229,11 @@ def getAllRequests():
             return RequestHandler().getAllRequests()
         else:
             return RequestHandler().searchRequest(request.args)
+
+
+@app.route('/DSRLApp/requests/resources', methods=['GET'])
+def getAllResourcesRequested():
+    return RequestHandler().getAllResourcesRequested()
 
 
 @app.route('/DSRLApp/requests/<int:reqid>', methods=['GET', 'PUT', 'DELETE'])
@@ -279,7 +296,7 @@ def getAllReserved():
         if request.json:
             return ReservedHandler().insertReserved(request.json)
         else:
-            return jsonify(Error="No order was provided.")
+            return jsonify(Error="No reservation was provided.")
     else:
         if not request.args:
             return ReservedHandler().getAllReserved()
@@ -312,7 +329,7 @@ def getAllBillingInformation():
         if request.json:
             return BillingInformationHandler().insertBillingInformation(request.json)
         else:
-            return jsonify(Error="No order was provided.")
+            return jsonify(Error="No billing information was provided.")
     else:
         if not request.args:
             return BillingInformationHandler().getAllBillingInformation()
@@ -338,6 +355,38 @@ def getBillingInformationById(bid):
 @app.route('/DSRLApp/users/<int:uid>/billinginformation')
 def getBillingInformationByUserId(uid):
     return BillingInformationHandler().getBillingInformationByUserId(uid)
+
+
+@app.route('/DSRLApp/users/<int:uid>/orders', methods=['GET', 'PUT', 'DELETE'])
+def getOrderByUserId(uid):
+    #fill
+    return jsonify(Error="Method not allowed."), 405
+
+
+@app.route('/DSRLApp/users/<int:uid>/requests', methods=['GET', 'PUT', 'DELETE'])
+def getReservedByUserId(uid):
+    #fill
+    return jsonify(Error="Method not allowed."), 405
+
+
+@app.route('/DSRLApp/categories', methods=['GET', 'POST'])
+def getAllCategories():
+    if request.method == 'POST':
+        if request.json:
+            return CategoryHandler().insertCategory(request.json)
+        else:
+            return jsonify(Error="No category was provided.")
+    else:
+        if not request.args:
+            return CategoryHandler().getAllCategories()
+        else:
+            return CategoryHandler().searchCategory(request.args)
+
+
+@app.route('/DSRLApp/categories/<int:catid>', methods=['GET', 'PUT', 'DELETE'])
+def getCategoriesById(catid):
+    return CategoryHandler().getCategoryById(catid)
+
 
 if __name__ == '__main__':
     app.run()

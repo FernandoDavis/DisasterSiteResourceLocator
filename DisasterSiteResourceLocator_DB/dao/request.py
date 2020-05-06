@@ -50,7 +50,7 @@ class RequestDAO:
     def getRequestByResourceName(self, resname):
         cursor = self.conn.cursor()
         query = "select reqid, cid, is_void, reqdate, reqquantity, resid, catid, resname, resdescription, reslocation from request natural inner join resource where resname like %(like)s order by resname;"
-        data_dict = []
+        data_dict = dict()
         data_dict['like'] = psycopg2.Binary('%' + resname + '%')
         cursor.execute(query, data_dict)
         result = []
@@ -61,7 +61,7 @@ class RequestDAO:
     def getRequestByCategory(self, cattype):
         cursor = self.conn.cursor()
         query = "select reqid, cid, is_void, reqdate, reqquantity, resid, catid, resname, resdescription, reslocation from request natural inner join resource natural inner join category where cattype like %(like)s order by resname;"
-        data_dict = []
+        data_dict = dict()
         data_dict['like'] = psycopg2.Binary('%' + cattype + '%')
         cursor.execute(query, data_dict)
         result = []

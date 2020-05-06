@@ -11,4 +11,38 @@ class BillingInformationDAO:
         self.conn = psycopg2._connect(connection_url)
 
 
+    def getAllBillingInformation(self):
+        cursor = self.conn.cursor()
+        query = "select bid, billing_address, paypal_account, uid from billinginformation;"
+        cursor.execute(query)
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result
 
+    def getBillingInformationById(self, bid):
+        cursor = self.conn.cursor()
+        query = "select bid, billing_address, paypal_account, uid from billinginformation where bid = %s;"
+        cursor.execute(query, (bid,))
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result
+
+    def getBillingInformationByUserId(self, uid):
+        cursor = self.conn.cursor()
+        query = "select bid, billing_address, paypal_account, uid from billinginformation where uid = %s;"
+        cursor.execute(query, (uid,))
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result
+
+    def getBillingInformationByPaypal(self, paypal_account):
+        cursor = self.conn.cursor()
+        query = "select bid, billing_address, paypal_account, uid from billinginformation where paypal_account = %s;"
+        cursor.execute(query, (paypal_account,))
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result

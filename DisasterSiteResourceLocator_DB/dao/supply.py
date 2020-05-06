@@ -36,32 +36,18 @@ class SupplyDAO:
             result.append(row)
         return result
 
-
-
-
-
-
-    def getAllResourcesRequested(self):
+    def getSupplyById(self, suid):
         cursor = self.conn.cursor()
-        query = "select resid, catid, resname, resdescription, reslocation from resource order by resname;"
-        cursor.execute(query)
+        query = "select suid, sid, is_void, is_available, suprice, sudate, suquantity, resid, catid, resname, resdescription, reslocation from supply natural inner join resource where suid = %s order by resname;"
+        cursor.execute(query, (suid,))
         result = []
         for row in cursor:
             result.append(row)
         return result
 
-    def getRequestById(self, reqid):
+    def getResourceBySupplyId(self, reqid):
         cursor = self.conn.cursor()
-        query = "select reqid, cid, is_void, reqdate, reqquantity, resid, catid, resname, resdescription, reslocation from request natural inner join resource where reqid = %s;"
-        cursor.execute(query, (reqid,))
-        result = []
-        for row in cursor:
-            result.append(row)
-        return result
-
-    def getResourceByRequestId(self, reqid):
-        cursor = self.conn.cursor()
-        query = "select resid, catid, resname, resdescription, reslocation from request natural inner join resource where reqid = %s;"
+        query = "select suid, sid, is_void, is_available, suprice, sudate, suquantity, resid, catid, resname, resdescription, reslocation from supply natural inner join resource where reqid = %s order by resname;"
         cursor.execute(query, (reqid,))
         result = []
         for row in cursor:
@@ -69,10 +55,10 @@ class SupplyDAO:
         return result
 
     # Needs testing!!!!!!!!
-    def getRequestByResourceName(self, resname):
+    def getSupplyByResourceName(self, resname):
         cursor = self.conn.cursor()
-        query = "select reqid, cid, is_void, reqdate, reqquantity, resid, catid, resname, resdescription, reslocation from request natural inner join resource where resname like %(like)s order by resname;"
-        data_dict = []
+        query = "select suid, sid, is_void, is_available, suprice, sudate, suquantity, resid, catid, resname, resdescription, reslocation from supply natural inner join resource where resname like %(like)s and is_available = 't' order by resname;"
+        data_dict = dict()
         data_dict['like'] = psycopg2.Binary('%' + resname + '%')
         cursor.execute(query, data_dict)
         result = []
@@ -80,10 +66,10 @@ class SupplyDAO:
             result.append(row)
         return result
 
-    def getRequestByCategory(self, cattype):
+    def getSupplyByCategory(self, cattype):
         cursor = self.conn.cursor()
-        query = "select reqid, cid, is_void, reqdate, reqquantity, resid, catid, resname, resdescription, reslocation from request natural inner join resource natural inner join category where cattype like %(like)s order by resname;"
-        data_dict = []
+        query = "select suid, sid, is_void, is_available, suprice, sudate, suquantity, resid, catid, resname, resdescription, reslocation from supply natural inner join resource where cattype like %(like)s and is_available = 't' order by resname;"
+        data_dict = dict()
         data_dict['like'] = psycopg2.Binary('%' + cattype + '%')
         cursor.execute(query, data_dict)
         result = []

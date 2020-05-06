@@ -73,7 +73,7 @@ class SupplyHandler:
             result = self.build_resource_dict(row[0])
         return jsonify(Supply=result)
 
-    def searchRequest(self, args):
+    def searchSupply(self, args):
         resname = args.get("resname")
         cattype = args.get("cattype")
         if len(args) == 1 and resname:

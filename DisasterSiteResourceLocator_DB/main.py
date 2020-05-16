@@ -159,9 +159,9 @@ def getAllAdministrators():
 
 
 @app.route('/DSRLApp/administrators/<int:aid>', methods=['GET', 'PUT', 'DELETE'])
-def getAdministratorById(aid):
+def getAdministratorByAdminId(aid):
     if request.method == 'GET':
-        return AdministratorHandler().getAdministratorById(aid)
+        return AdministratorHandler().getAdministratorByAdminId()
     elif request.method == 'PUT':
         if request.json:
             return AdministratorHandler().updateAdministrator(aid, request.json)
@@ -359,14 +359,12 @@ def getBillingInformationByUserId(uid):
 
 @app.route('/DSRLApp/users/<int:uid>/orders', methods=['GET', 'PUT', 'DELETE'])
 def getOrderByUserId(uid):
-    #fill
-    return jsonify(Error="Method not allowed."), 405
+    return OrderHandler.getOrderByUserId(uid)
 
 
 @app.route('/DSRLApp/users/<int:uid>/requests', methods=['GET', 'PUT', 'DELETE'])
 def getReservedByUserId(uid):
-    #fill
-    return jsonify(Error="Method not allowed."), 405
+    return ReservedHandler.getReservedByUserId(uid)
 
 
 @app.route('/DSRLApp/categories', methods=['GET', 'POST'])

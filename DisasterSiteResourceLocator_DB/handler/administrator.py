@@ -24,9 +24,9 @@ class AdministratorHandler:
             result_list.append(result)
         return jsonify(Administrator=result_list)
 
-    def getAdministratorById(self, aid):
+    def getAdministratorByAdminId(self, aid):
         dao = AdministratorDAO()
-        row = dao.getAdministratorById(aid)
+        row = dao.getAdministratorByAdminId(aid)
         if not row:
             return jsonify(Error="Administrator Not Found"), 404
         else:
@@ -45,3 +45,12 @@ class AdministratorHandler:
     def updateAdministrator(self, aid, form):
         result = self.build_administrator_dict((1, 3, "Grandpa", "password", "Gabriel", "Soto"))
         return jsonify(Administrator=result), 200
+
+    def insertAdministrator(self, uid):
+        dao = AdministratorDAO
+        row = dao.getAdministratorByUserId()
+        if not row:
+            result = dao.addAdministrator(uid)
+            return jsonify(Administrator=result), 201
+        else:
+            return jsonify(Error= "Administatrator exists."), 400

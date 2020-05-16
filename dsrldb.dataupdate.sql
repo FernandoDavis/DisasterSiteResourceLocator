@@ -26,125 +26,125 @@ ELSE
 END IF;
 
 INSERT INTO users(
-            uid, uname, upass, first_name, last_name)
-    VALUES (1, 'Javalicious', 'eclipse', 'Eclipse', 'IDE');
+            uname, upass, first_name, last_name)
+    VALUES ('Javalicious', 'eclipse', 'Eclipse', 'IDE');
 
 INSERT INTO users(
-            uid, uname, upass, first_name, last_name)
-    VALUES (2, 'Webman', '123', 'Peter', 'Parker');
+            uname, upass, first_name, last_name)
+    VALUES ('Webman', '123', 'Peter', 'Parker');
 
 
 INSERT INTO users(
-            uid, uname, upass, first_name, last_name)
-    VALUES (3, 'Strongman', 'lift', 'Macho Man', 'Randy Savage');
+            uname, upass, first_name, last_name)
+    VALUES ('Strongman', 'lift', 'Macho Man', 'Randy Savage');
 
 INSERT INTO users(
-            uid, uname, upass, first_name, last_name)
-    VALUES (4, 'Rider', 'sword', 'Fury', 'Speedrun');
+            uname, upass, first_name, last_name)
+    VALUES ('Rider', 'sword', 'Fury', 'Speedrun');
 
 INSERT INTO users(
-            uid, uname, upass, first_name, last_name)
-    VALUES (5, 'Botox', 'death', 'Danny', 'Trejo');
+            uname, upass, first_name, last_name)
+    VALUES ('Botox', 'death', 'Danny', 'Trejo');
 
 INSERT INTO users(
-            uid, uname, upass, first_name, last_name)
-    VALUES (6, 'Zombies', 'movie', 'George', 'Romero');    
+            uname, upass, first_name, last_name)
+    VALUES ('Zombies', 'movie', 'George', 'Romero');    
 
 INSERT INTO users(
-            uid, uname, upass, first_name, last_name)
-    VALUES (7, 'Savior', 'supply', 'Big', 'Daddy');
+            uname, upass, first_name, last_name)
+    VALUES ('Savior', 'supply', 'Big', 'Daddy');
 
 INSERT INTO users(
-            uid, uname, upass, first_name, last_name)
-    VALUES (8, 'Bomb', 'db123', 'Alison', 'DeBou');
+            uname, upass, first_name, last_name)
+    VALUES ('Bomb', 'db123', 'Alison', 'DeBou');
 
 INSERT INTO users(
-            uid, uname, upass, first_name, last_name)
-    VALUES (9, 'VXDL', 'goya', 'Gabriel', 'Soto');
+            uname, upass, first_name, last_name)
+    VALUES ('VXDL', 'goya', 'Gabriel', 'Soto');
 
 INSERT INTO users(
-            uid, uname, upass, first_name, last_name)
-    VALUES (10, 'purpetty', 'hair', 'Gabriela', 'Sanchez');
+            uname, upass, first_name, last_name)
+    VALUES ('purpetty', 'hair', 'Gabriela', 'Sanchez');
 
 INSERT INTO users(
-            uid, uname, upass, first_name, last_name)
-    VALUES (11, 'catscratch', 'hairball', 'Anne', 'Wettsburg');
+            uname, upass, first_name, last_name)
+    VALUES ('catscratch', 'hairball', 'Anne', 'Wettsburg');
 
 INSERT INTO users(
-            uid, uname, upass, first_name, last_name)
-    VALUES (12, 'Sniper', 'thereal', 'Chris', 'Kyle');
+            uname, upass, first_name, last_name)
+    VALUES ('Sniper', 'thereal', 'Chris', 'Kyle');
 
 INSERT INTO users(
-            uid, uname, upass, first_name, last_name)
-    VALUES (13, 'Taxeslmao', 'smolloan', 'Donald', 'Trump');
+            uname, upass, first_name, last_name)
+    VALUES ('Taxeslmao', 'smolloan', 'Donald', 'Trump');
 
 INSERT INTO users(
-            uid, uname, upass, first_name, last_name)
-    VALUES (14, 'Taskforce', 'emails', 'Hillary', 'Clinton');
+            uname, upass, first_name, last_name)
+    VALUES ('Taskforce', 'emails', 'Hillary', 'Clinton');
 
 INSERT INTO users(
-            uid, uname, upass, first_name, last_name)
-    VALUES (15, 'Screamface', 'phone', 'Jennete', 'Mcquirk');
+            uname, upass, first_name, last_name)
+    VALUES ('Screamface', 'phone', 'Jennete', 'Mcquirk');
 
 INSERT INTO users(
-            uid, uname, upass, first_name, last_name)
-    VALUES (16, 'Mining', 'blocks', 'Minecraft', 'Steve');
+            uname, upass, first_name, last_name)
+    VALUES ('Mining', 'blocks', 'Minecraft', 'Steve');
 
 INSERT INTO users(
-            uid, uname, upass, first_name, last_name)
-    VALUES (17, 'Demonslayr', 'motorcyc', 'Dante', 'Sparda');
+            uname, upass, first_name, last_name)
+    VALUES ('Demonslayr', 'motorcyc', 'Dante', 'Sparda');
 
 INSERT INTO users(
-            uid, uname, upass, first_name, last_name)
-    VALUES (18, 'CatBah', '12d22ggd', 'Carlos', 'Petardo');
+            uname, upass, first_name, last_name)
+    VALUES ('CatBah', '12d22ggd', 'Carlos', 'Petardo');
 
 INSERT INTO users(
-            uid, uname, upass, first_name, last_name)
-    VALUES (19, 'Champion Zerato', 'nojw12h4', 'Fernando', 'Cordero');
+            uname, upass, first_name, last_name)
+    VALUES ('Champion Zerato', 'nojw12h4', 'Fernando', 'Cordero');
 
 INSERT INTO users(
-            uid, uname, upass, first_name, last_name)
-    VALUES (20, 'Roana', 'dwno12nj', 'Raymond', 'Perez');
+            uname, upass, first_name, last_name)
+    VALUES ('Roana', 'dwno12nj', 'Raymond', 'Perez');
 
 INSERT INTO users(
-            uid, uname, upass, first_name, last_name)
-    VALUES (21, 'Angelica', 'o3kg1102', 'Noel', 'Diaz');
+            uname, upass, first_name, last_name)
+    VALUES ('Angelica', 'o3kg1102', 'Noel', 'Diaz');
 
 INSERT INTO users(
-            uid, uname, upass, first_name, last_name)
-    VALUES (22, 'Dingo', 'awdom12j', 'Christian', 'Mellark');
+            uname, upass, first_name, last_name)
+    VALUES ('Dingo', 'awdom12j', 'Christian', 'Mellark');
 
 INSERT INTO users(
-            uid, uname, upass, first_name, last_name)
-    VALUES (23, 'SSB', 'Qwerty12', 'Jesus', 'Rojas');
+            uname, upass, first_name, last_name)
+    VALUES ('SSB', 'Qwerty12', 'Jesus', 'Rojas');
 
 INSERT INTO users(
-            uid, uname, upass, first_name, last_name)
-    VALUES (24, 'NoName', '00039mm', 'Pedro', 'Velez');
+            uname, upass, first_name, last_name)
+    VALUES ('NoName', '00039mm', 'Pedro', 'Velez');
 
 INSERT INTO users(
-            uid, uname, upass, first_name, last_name)
-    VALUES (25, 'GodHimself', '12jj42m2', 'Jesus', 'Rosario');
+            uname, upass, first_name, last_name)
+    VALUES ('GodHimself', '12jj42m2', 'Jesus', 'Rosario');
 
 INSERT INTO users(
-            uid, uname, upass, first_name, last_name)
-    VALUES (26, 'Summer', '12d22ggd', 'Erika', 'Rodriguez');
+            uname, upass, first_name, last_name)
+    VALUES ('Summer', '12d22ggd', 'Erika', 'Rodriguez');
 
 INSERT INTO users(
-            uid, uname, upass, first_name, last_name)
-    VALUES (27, 'Lidica', 'dojaCat', 'Shakira', 'Rivera');
+            uname, upass, first_name, last_name)
+    VALUES ('Lidica', 'dojaCat', 'Shakira', 'Rivera');
 
 INSERT INTO users(
-            uid, uname, upass, first_name, last_name)
-    VALUES (28,  'Empty', 'password', 'Throwaway', 'Account');
+            uname, upass, first_name, last_name)
+    VALUES ('Empty', 'password', 'Throwaway', 'Account');
 
 INSERT INTO users(
-            uid, uname, upass, first_name, last_name)
-    VALUES (29, 'ML Achates', 'gold4lyf', 'Christina', 'Sanchez');
+            uname, upass, first_name, last_name)
+    VALUES ('ML Achates', 'gold4lyf', 'Christina', 'Sanchez');
 
 INSERT INTO users(
-            uid, uname, upass, first_name, last_name)
-    VALUES (30, 'Vildred', 'Pass1234', 'Fernando', 'Rivera');
+            uname, upass, first_name, last_name)
+    VALUES ('Vildred', 'Pass1234', 'Fernando', 'Rivera');
 
 END $$;  -- Ends users data update.
 

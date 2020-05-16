@@ -77,3 +77,6 @@ class SupplyDAO:
         for row in cursor:
             result.append(row)
         return result
+
+    # def addSupplyByID??????:
+    #   I might be too sleepy but I'm not certain as to which ids this should be added.

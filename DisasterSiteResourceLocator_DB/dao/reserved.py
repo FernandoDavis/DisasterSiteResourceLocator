@@ -64,3 +64,27 @@ class ReservedDAO:
             result.append(row)
         return result
 
+    def addReservedByUserID(self, rquantity, uid, suid, sid):
+        if uid:
+            cursor = self.conn.cursor()
+            query = '''with uid_table as (select uid from user where uid = ?) INSERT INTO reservation(rquantity, cid, uid, suid, sid) 
+            VALUES (rquantity, (select * from uid_table), %s, %s, %s);'''
+            cursor.execute(query, (rquantity, uid, suid, sid,))
+            rnumber = cursor.fetchone()
+            self.conn.commit()
+            return rnumber
+        return None
+
+    def addReservedByConsumerID(self, rquantity, uid, suid, sid):
+        if uid:
+            cursor = self.conn.cursor()
+            query = '''with cid_table as (select cid from consumer where cid = ?) INSERT INTO reservation(rquantity, cid, uid, suid, sid) 
+            VALUES (rquantity, %s, (select * from cid_table), %s, %s);'''
+            cursor.execute(query, (rquantity, uid, suid, sid,))
+            rnumber = cursor.fetchone()
+            self.conn.commit()
+            return rnumber
+        return None
+
+
+

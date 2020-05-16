@@ -19,10 +19,19 @@ class AdministratorDAO:
             result.append(row)
         return result
 
-    def getAdministratorById(self, aid):
+    def getAdministratorByAdminId(self, aid):
         cursor = self.conn.cursor()
         query = "select aid, uid, uname, upass, first_name, last_name from administrator natural inner join users where aid = %s;"
         cursor.execute(query, (aid,))
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result
+
+    def getAdministratorByUserId(self, uid):
+        cursor = self.conn.cursor()
+        query = "select aid, uid, uname, upass, first_name, last_name from administrator natural inner join users where uid = %s;"
+        cursor.execute(query, (uid,))
         result = []
         for row in cursor:
             result.append(row)

@@ -107,3 +107,5 @@ class UsersHandler:
         # Filler code
         result = self.build_users_dict((1, "Abuelo", "password", "Fernando", "Davis"))
         return jsonify(User=result), 200
+
+    # def insertUser(self, uid): Im a bit too sleepey, I need to check for type of user with utype, no touchy pls

@@ -1,5 +1,6 @@
 from flask import jsonify
 from dao.billinginformation import BillingInformationDAO
+from dao.users import UsersDAO
 
 
 class BillingInformationHandler:
@@ -51,10 +52,15 @@ class BillingInformationHandler:
             result_list.append(result)
         return jsonify(Request=result_list)
 
-    def insertBillingInformation(self, form):
-        # Filler Code
-        result = self.build_billing_information_dict((1, "Another address", "account@domain.com", 1))
-        return jsonify(BillingInformation=result), 201
+    def insertBillingInformation(self, billing_address, paypal_account, uid):
+        dao = BillingInformationDAO
+        check = UsersDAO
+        row = check.getUserById()
+        if not row:
+            return jsonify(Error = "User ID must be belong to an existing user."), 400
+        else:
+            result = dao.insertBillingInformation(billing_address, paypal_account, uid)
+            return jsonify(BillingInformation=result), 201
 
     def deleteBillingInformation(self, bid):
         #Filler code

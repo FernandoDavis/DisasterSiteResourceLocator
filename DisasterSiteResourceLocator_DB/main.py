@@ -159,9 +159,9 @@ def getAllAdministrators():
 
 
 @app.route('/DSRLApp/administrators/<int:aid>', methods=['GET', 'PUT', 'DELETE'])
-def getAdministratorById(aid):
+def getAdministratorByAdminId(aid):
     if request.method == 'GET':
-        return AdministratorHandler().getAdministratorById(aid)
+        return AdministratorHandler().getAdministratorByAdminId()
     elif request.method == 'PUT':
         if request.json:
             return AdministratorHandler().updateAdministrator(aid, request.json)

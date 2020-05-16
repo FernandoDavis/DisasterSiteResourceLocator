@@ -47,7 +47,7 @@ class BillingInformationDAO:
             result.append(row)
         return result
 
-    def addBillingInformation(self, billing_address, paypal_account, uid):
+    def insertBillingInformation(self, billing_address, paypal_account, uid):
         cursor = self.conn.cursor()
         query = "INSERT INTO billinginformation(billing_address, paypal_account, uid) VALUES (%s, %s, %s) returning bid;"
         cursor.execute(query, (billing_address, paypal_account, uid,))

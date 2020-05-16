@@ -1,6 +1,7 @@
 from flask import jsonify
 from dao.reserved import ReservedDAO
-
+from dao.users import UsersDAO
+from dao.consumer import ConsumerDAO
 from handler.supply import SupplyHandler
 
 
@@ -69,9 +70,25 @@ class ReservedHandler:
             result_list.append(result)
         return jsonify(Request=result_list)
 
-    def insertReserved(self, form):
-        result = self.build_reserved_dict((2, 1, 2, 1, 1, "2020-03-22", 5))
-        return jsonify(Reserved=result), 201
+    def insertReservedByUserId(self, rquantity, uid, suid, sid):
+        dao = ReservedDAO
+        check = UsersDAO
+        result = check.getUserById(uid)
+        if result is not None:
+            result = dao.addReservedByUserID(rquantity, uid, suid, sid)
+            return jsonify(Reserved=result), 201
+        else:
+            return jsonify(Error="User ID does not exist.")
+
+    def insertReservedByConsumerId(self, rquantity, cid, suid, sid):
+        dao = ReservedDAO
+        check = ConsumerDAO
+        result = check.getConsumerById(cid)
+        if result is not None:
+            result = dao.addReservedByUserID(rquantity, cid, suid, sid)
+            return jsonify(Reserved=result), 201
+        else:
+            return jsonify(Error="Consumer ID does not exist.")
 
     def deleteReserved(self, rnumber):
         #Filler code

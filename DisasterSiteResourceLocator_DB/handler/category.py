@@ -55,3 +55,12 @@ class CategoryHandler:
         #Filler Code
         result = self.build_category_dict((1, "Dry Food"))
         return jsonify(Supplier=result), 200
+
+    def insertCategory(self, cattype):
+        dao = CategoryDAO
+        row = dao.getCategoryByType(cattype)
+        if not row:
+            result = dao.addCategory(cattype)
+            return jsonify(Categories=result), 201
+        else:
+            return jsonify(Error="Category type already exists."), 400

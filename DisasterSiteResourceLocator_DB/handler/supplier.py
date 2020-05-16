@@ -1,5 +1,6 @@
 from flask import jsonify
 from dao.supplier import SupplierDAO
+from dao.users import UsersDAO
 
 
 class SupplierHandler:
@@ -149,3 +150,13 @@ class SupplierHandler:
         # Filler Code
         result = self.build_supplier_dict((1, 2, "Abuelo", "password", "Fernando", "Davis", "AnAddress"))
         return jsonify(Supplier=result), 200
+
+    def insertSupplier(self, uid):
+        dao = SupplierDAO
+        check = UsersDAO
+        result = check.getUserById(uid)
+        if result is not None:
+            result = dao.addSupplier(uid)
+            return jsonify(Supplier=result), 201
+        else:
+            return jsonify(Error="User ID does not exist."), 400

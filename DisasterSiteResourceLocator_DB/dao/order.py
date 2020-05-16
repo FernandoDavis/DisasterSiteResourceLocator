@@ -64,3 +64,26 @@ class OrderDAO:
         for row in cursor:
             result.append(row)
         return result
+
+    def addOrderByUserID(self, uid, suid, sid, oquantity):
+        if uid:
+            cursor = self.conn.cursor()
+            query = '''with uid_table as (select cid from consumer where uid = %s) INSERT INTO \"order\"(cid, uid, suid, sid, oquantity) 
+            VALUES ((select * from uid_table), %s, %s %s, %s) returning onumber;'''
+            cursor.execute(query, (uid, suid, sid, oquantity,))
+            onumber = cursor.fetchone()
+            self.conn.commit()
+            return onumber;
+        return None
+
+
+    def addOrderByConsumerID(self, cid, suid, sid, oquantity):
+        if cid:
+            cursor = self.conn.cursor()
+            query = '''with cid_table as (select cid from consumer where cid = %s) INSERT INTO \"order\"(cid, uid, suid, sid, oquantity) 
+            VALUES (%s, (select * from cid_table), %s %s, %s);'''
+            cursor.execute(query, (cid, suid, sid, oquantity,))
+            onumber = cursor.fetchone()
+            self.conn.commit()
+            return onumber;
+        return None

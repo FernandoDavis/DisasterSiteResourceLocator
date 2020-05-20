@@ -70,9 +70,19 @@ class OrderHandler:
             result_list.append(result)
         return jsonify(Request=result_list)
 
-    def insertOrder(self, form):
-        result = self.build_order_dict((2, 1, 2, 1, 1, "2020-03-22", 5))
-        return jsonify(Order=result), 201
+    def insertOrderByUserId(self, uid, suid, sid, oquantity):
+        dao = OrderDAO
+        result = dao.addOrderByUserID(uid, suid, sid, oquantity)
+        if result is not None:
+            return jsonify(Order=result), 201
+        return jsonify(Error="User ID does not exist."), 400
+
+    def insertOrderByConsumerId(self, cid, suid, sid, oquantity):
+        dao = OrderDAO
+        result = dao.addOrderByConsumerID(cid, suid, sid, oquantity)
+        if result is not None:
+            return jsonify(Order=result), 201
+        return jsonify(Error="User ID does not exist."), 400
 
     def deleteOrder(self, onumber):
         #Filler code

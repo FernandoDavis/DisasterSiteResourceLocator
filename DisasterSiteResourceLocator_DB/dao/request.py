@@ -46,7 +46,6 @@ class RequestDAO:
             result.append(row)
         return result
 
-    # Needs testing!!!!!!!!
     def getRequestByResourceName(self, resname):
         cursor = self.conn.cursor()
         query = "select reqid, cid, is_void, reqdate, reqquantity, resid, catid, resname, resdescription, reslocation from request natural inner join resource where resname like %(like)s order by resname;"
@@ -69,14 +68,14 @@ class RequestDAO:
             result.append(row)
         return result
 
-    # def insertRequest(self, catid, resdescription, resname, reslocation, sid, suprice, suquantity):
-    #     cursor = self.conn.cursor()
-    #     query = '''with rows as (INSERT INTO resource(catid, resdescription, resname, reslocation) VALUES (1, 'bottled water requested, please', 'Bottled Water', 'another address') Returning resid)
-    #                 INSERT INTO request(cid, resid)
-    #                 VALUES (1, (select resid from rows));'''
-    #     cursor.execute(query, (catid, resdescription, resname, reslocation, sid, suprice, suquantity))
-    #     reqid = cursor.fetchone()[0]
-    #     self.conn.commit()
-    #     return suid
+    def insertRequest(self, catid, resdescription, resname, reslocation, cid, reqquantity):
+        cursor = self.conn.cursor()
+        query = '''with rows as (INSERT INTO resource(catid, resdescription, resname, reslocation) VALUES (%s, %s, %s, %s) Returning resid)
+                    INSERT INTO request(cid, resid, reqquantity)
+                    VALUES (%s, (select resid from rows), %s) returning reqid;'''
+        cursor.execute(query, (catid, resdescription, resname, reslocation, cid, reqquantity))
+        reqid = cursor.fetchone()[0]
+        self.conn.commit()
+        return reqid
 
 

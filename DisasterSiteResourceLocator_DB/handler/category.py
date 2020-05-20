@@ -26,7 +26,7 @@ class CategoryHandler:
         if not row:
             return jsonify(Error="Category Not Found"), 404
         else:
-            result = self.build_category_dict(row)
+            result = self.build_category_dict(row[0])
         return jsonify(Categories=result)
 
 

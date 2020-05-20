@@ -52,23 +52,21 @@ class BillingInformationHandler:
             result_list.append(result)
         return jsonify(Request=result_list)
 
-    def insertBillingInformation(self, billing_address, paypal_account, uid):
-        dao = BillingInformationDAO
-        check = UsersDAO
-        row = check.getUserById()
-        if not row:
-            return jsonify(Error = "User ID must be belong to an existing user."), 400
-        else:
-            result = dao.insertBillingInformation(billing_address, paypal_account, uid)
-            return jsonify(BillingInformation=result), 201
+    def insertBillingInformation(self, form):
+        if form and (len(form) == 3):
+            uid = form['uid']
+            paypal_account = form['paypal_account']
+            billing_address = form['billing_address']
+            if uid and paypal_account and billing_address:
+                dao = BillingInformationDAO()
+                check = UsersDAO()
+                row = check.getUserById(uid)
+                if not row:
+                    return jsonify(Error = "User ID must be belong to an existing user."), 400
+                else:
+                    result = dao.insertBillingInformation(billing_address, paypal_account, uid)
+                    return jsonify(BillingInformation=result), 201
+            return jsonify(ERROR="There was an error while inserting")
 
-    def deleteBillingInformation(self, bid):
-        #Filler code
-        return jsonify(DeleteStatus="OK"), 200
-
-    def updateBillingInformation(self, bid, form):
-        # Filler Code
-        result = self.build_billing_information_dict((1, "Some address", "account@domain.com", 1))
-        return jsonify(BillingInformation=result), 200
 
 

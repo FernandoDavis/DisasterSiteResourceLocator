@@ -20,7 +20,7 @@ class OrderDAO:
             result.append(row)
         return result
 
-    def getOrderById(self, onumber):
+    def getOrdersById(self, onumber):
         cursor = self.conn.cursor()
         query = "SELECT onumber, cid, uid, suid, sid, odate_ordered, oquantity, odate_delivered FROM \"order\" where onumber = %s"
         cursor.execute(query, (onumber,))
@@ -40,7 +40,7 @@ class OrderDAO:
 
     def getSupplyByOrderId(self, onumber):
         cursor = self.conn.cursor()
-        query = "SELECT suid, sid, resid, is_void, is_reserved, suprice, sudate, suquantity FROM \"order\" NATURAL INNER JOIN supply where onumber = %s"
+        query = "SELECT suid, sid, resid, is_void, is_available, suprice, sudate, suquantity FROM \"order\" NATURAL INNER JOIN supply where onumber = %s"
         cursor.execute(query, (onumber,))
         result = []
         for row in cursor:
@@ -50,7 +50,7 @@ class OrderDAO:
     def getOrderByDateOrdered(self, odate_ordered):
         cursor = self.conn.cursor()
         query = "SELECT onumber, cid, uid, suid, sid, odate_ordered, oquantity, odate_delivered FROM \"order\" where odate_ordered = %s"
-        cursor.execute(query, (dt.date(odate_ordered),))
+        cursor.execute(query, (dt.datetime.strptime(odate_ordered, "%Y-%m-%d"),))
         result = []
         for row in cursor:
             result.append(row)
@@ -59,7 +59,7 @@ class OrderDAO:
     def getOrderByDateDelivered(self, odate_delivered):
         cursor = self.conn.cursor()
         query = "SELECT onumber, cid, uid, suid, sid, odate_ordered, oquantity, odate_delivered FROM \"order\" where odate_delivered = %s"
-        cursor.execute(query, (dt.date(odate_delivered),))
+        cursor.execute(query, (dt.datetime.strptime(odate_delivered, "%Y-%m-%d"),))
         result = []
         for row in cursor:
             result.append(row)
@@ -68,22 +68,24 @@ class OrderDAO:
     def addOrderByUserID(self, uid, suid, sid, oquantity):
         if uid:
             cursor = self.conn.cursor()
-            query = '''with uid_table as (select cid from consumer where uid = %s) INSERT INTO \"order\"(cid, uid, suid, sid, oquantity) 
-            VALUES ((select * from uid_table), %s, %s %s, %s) returning onumber;'''
-            cursor.execute(query, (uid, suid, sid, oquantity,))
+            query = '''with uid_table as (select cid from consumer where uid = %s) 
+                        INSERT INTO \"order\"(cid, uid, suid, sid, oquantity) 
+                        VALUES ((select * from uid_table), %s, %s, %s, %s) returning onumber;'''
+            cursor.execute(query, (uid, uid, suid, sid, oquantity))
             onumber = cursor.fetchone()
             self.conn.commit()
-            return onumber;
+            return onumber
         return None
 
 
     def addOrderByConsumerID(self, cid, suid, sid, oquantity):
         if cid:
             cursor = self.conn.cursor()
-            query = '''with cid_table as (select cid from consumer where cid = %s) INSERT INTO \"order\"(cid, uid, suid, sid, oquantity) 
-            VALUES (%s, (select * from cid_table), %s %s, %s);'''
-            cursor.execute(query, (cid, suid, sid, oquantity,))
+            query = '''with cid_table as (select uid from consumer where cid = %s) 
+                        INSERT INTO \"order\"(cid, uid, suid, sid, oquantity) 
+                        VALUES (%s, (select * from cid_table), %s, %s, %s) returning onumber;'''
+            cursor.execute(query, (cid, cid, suid, sid, oquantity))
             onumber = cursor.fetchone()
             self.conn.commit()
-            return onumber;
+            return onumber
         return None

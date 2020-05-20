@@ -142,21 +142,28 @@ class SupplierHandler:
             result_list.append(result)
         return jsonify(Supplier=result_list)
 
-    def deleteSupplier(self, sid):
-        #Filler code
-        return jsonify(DeleteStatus="OK"), 200
-
     def updateSupplier(self, sid, form):
-        # Filler Code
-        result = self.build_supplier_dict((1, 2, "Abuelo", "password", "Fernando", "Davis", "AnAddress"))
-        return jsonify(Supplier=result), 200
+        dao = SupplierDAO()
+        try:
+            if form and len(form) == 2:
+                saddress = form['saddress']
+                company_name = form['company_name']
+                result = dao.updateSupplier(sid, saddress, company_name)
+                if result:
+                    return jsonify(Supplier=[sid, saddress, company_name]), 200
+            return jsonify(ERROR="Failed to update supplier"), 400
+        except:
+            return jsonify(ERROR="Failed to update supplier"), 400
 
     def insertSupplier(self, uid):
-        dao = SupplierDAO
-        check = UsersDAO
-        result = check.getUserById(uid)
-        if result is not None:
-            result = dao.addSupplier(uid)
-            return jsonify(Supplier=result), 201
-        else:
-            return jsonify(Error="User ID does not exist."), 400
+        try:
+            dao = SupplierDAO()
+            check = UsersDAO()
+            result = check.getUserById(uid)
+            if result is not None:
+                result = dao.addSupplier(uid)
+                return jsonify(SupplierId=result), 201
+            else:
+                return jsonify(Error="User ID does not exist."), 400
+        except:
+            return jsonify(ERROR="Failed to insert supplier"), 400

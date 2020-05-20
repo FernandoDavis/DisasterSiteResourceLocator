@@ -80,16 +80,20 @@ class RequestHandler:
         return jsonify(Request=result_list)
 
     def insertRequest(self, form):
-        # Filler Code
-        result = self.build_request_dict((1, 1, 'f', "2020-03-22", 1, 1, "Uncooked rice unopened and available.", "Uncooked rice", "Calle tal"))
-        return jsonify(Request=result), 201
-
-    def deleteRequest(self, reqid):
-        #Filler code
-        return jsonify(DeleteStatus="OK"), 200
-
-    def updateRequest(self, reqid, form):
-        result = self.build_request_dict((1, 1, 'f', "2020-03-22", 1, 1, "Uncooked rice unopened and available.", "Uncooked rice", "Calle tal"))
-        return jsonify(Request=result), 200
+        if form and len(form) == 6:
+            cid = form['cid']
+            reqquantity = form['reqquantity']
+            catid = form['catid']
+            resdescription = form['resdescription']
+            resname = form['resname']
+            reslocation = form['reslocation']
+            if cid and reqquantity and catid and resdescription and resname and reslocation:
+                dao = RequestDAO()
+                result = dao.insertRequest(catid, resdescription, resname, reslocation, cid, reqquantity)
+                return jsonify(Request=result), 201
+            else:
+                return jsonify(Error="Malformed post request")
+        else:
+            return jsonify(Error="Malformed post request")
 
 

@@ -91,30 +91,23 @@ class SupplyHandler:
         return jsonify(Supply=result_list)
 
     def insertSupply(self, form):
-        # if form and len(form) == 7:
-        #     sid = form['sid']
-        #     suprice = form['suprice']
-        #     suquantity = form['suquantity']
-        #     catid = form['catid']
-        #     resdescription = form['resdescription']
-        #     resname = form['resname']
-        #     reslocation = form['reslocation']
-        #     if sid and suprice and suquantity and catid and resdescription and resname and reslocation:
-        #         result = self.build_supply_dict((1, sid, 'f', 'f', suprice, "2020-03-22", suquantity, 1, catid, resdescription, resname, reslocation))
-        #         return jsonify(Supply=result), 201
-        #     else:
-        #         return jsonify(Error="Malformed post request")
-        # else:
-        #     return jsonify(Error="Malformed post request")
-        result = self.build_supply_dict((1, 1, 'f', 'f', 1.5, "2020-03-22", 10, 1, 1, "Uncooked rice available test", "Uncooked rice", "Por carolina estoy"))
-        return jsonify(Supply=result), 201
+        if form and len(form) == 7:
+            sid = form['sid']
+            suprice = form['suprice']
+            suquantity = form['suquantity']
+            catid = form['catid']
+            resdescription = form['resdescription']
+            resname = form['resname']
+            reslocation = form['reslocation']
+            if sid and suprice and suquantity and catid and resdescription and resname and reslocation:
+                dao = SupplyDAO()
+                result = dao.insertSupply(catid, resdescription, resname, reslocation, sid, suprice, suquantity)
+                return jsonify(Supply=result), 201
+            else:
+                return jsonify(Error="Malformed post request")
+        else:
+            return jsonify(Error="Malformed post request")
 
-    def deleteSupply(self, suid):
-        #Filler code
-        return jsonify(DeleteStatus="OK"), 200
 
-    def updateSupply(self, suid, form):
-        result = self.build_supply_dict((1, 1, 'f', 'f', 1.5, "2020-03-22", 15, 1, 1, "Uncooked rice unopened and available.", "Uncooked rice", "Calle tal"))
-        return jsonify(Supply=result), 200
 
 

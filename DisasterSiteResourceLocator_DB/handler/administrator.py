@@ -33,19 +33,6 @@ class AdministratorHandler:
             result = self.build_administrator_dict(row[0])
         return jsonify(Administrator=result)
 
-    def searchAdministrator(self, args):
-        #Filler code
-        result = self.build_administrator_dict((1, 3, "Pa", "password", "Gabriel", "Soto"))
-        return jsonify(Administrator=result)
-
-    def deleteAdministrator(self, aid):
-        # Filler code
-        return jsonify(DeleteStatus="OK"), 200
-
-    def updateAdministrator(self, aid, form):
-        result = self.build_administrator_dict((1, 3, "Grandpa", "password", "Gabriel", "Soto"))
-        return jsonify(Administrator=result), 200
-
     def insertAdministrator(self, uid):
         dao = AdministratorDAO
         row = dao.getAdministratorByUserId()

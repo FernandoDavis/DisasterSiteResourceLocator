@@ -1,5 +1,6 @@
 from flask import jsonify
 from dao.consumer import ConsumerDAO
+from dao.users import UsersDAO
 
 
 class ConsumerHandler:
@@ -92,11 +93,27 @@ class ConsumerHandler:
             result_list.append(result)
         return jsonify(Consumer=result_list)
 
-    def deleteConsumer(self, cid):
-        # Filler code
-        return jsonify(DeleteStatus="OK"), 200
-
     def updateConsumer(self, cid, form):
-        # Filler Code
-        result = self.build_consumer_dict((1, 1, "Grandad", "password", "Jose", "Tua", "SomeAddress"))
-        return jsonify(Consumer=result), 200
+        dao = ConsumerDAO()
+        try:
+            if form and len(form) == 1:
+                caddress = form['caddress']
+                result = dao.updateConsumer(cid, caddress)
+                if result:
+                    return jsonify(Supplier=[cid, caddress]), 200
+            return jsonify(ERROR="Failed to update consumer"), 400
+        except:
+            return jsonify(ERROR="Failed to update consumer")
+
+    def insertConsumer(self, uid):
+        try:
+            dao = ConsumerDAO()
+            check = UsersDAO()
+            result = check.getUserById(uid)
+            if result is not None:
+                result = dao.addConsumer(uid)
+                return jsonify(ConsumerId=result), 201
+            else:
+                return jsonify(Error="User ID does not exist."), 400
+        except:
+            return jsonify(ERROR="Failed to insert consumer")

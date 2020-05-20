@@ -99,13 +99,4 @@ class UsersHandler:
             result_list.append(result)
         return jsonify(Users=result_list)
 
-    def deleteUser(self, uid):
-        #Filler code
-        return jsonify(DeleteStatus="OK"), 200
-
-    def updateUser(self, uid, form):
-        # Filler code
-        result = self.build_users_dict((1, "Abuelo", "password", "Fernando", "Davis"))
-        return jsonify(User=result), 200
-
     # def insertUser(self, uid): Im a bit too sleepey, I need to check for type of user with utype, no touchy pls

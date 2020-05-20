@@ -13,7 +13,7 @@ from handler.users import UsersHandler
 # Import Cross-Origin Resource Sharing to enable
 # services on other ports on this machine or on other
 # machines to access this app
-from flask_cors import CORS, cross_origin
+from flask_cors import CORS
 
 # Activate
 app = Flask(__name__)
@@ -89,17 +89,10 @@ def getAllUsersAvailable():
             return UsersHandler().searchUsers(request.args)
 
 
-@app.route('/DSRLApp/users/<int:uid>', methods=['GET', 'PUT', 'DELETE'])
+@app.route('/DSRLApp/users/<int:uid>', methods=['GET'])
 def getUserById(uid):
     if request.method == 'GET':
         return UsersHandler().getUserById(uid)
-    elif request.method == 'PUT':
-        if request.json:
-            return UsersHandler().updateUser(uid, request.json)
-        else:
-            return jsonify(Error="No parameters were given."), 404
-    elif request.method == 'DELETE':
-        return UsersHandler().deleteUser(uid)
     else:
         return jsonify(Error="Method not allowed."), 405
 
@@ -112,7 +105,7 @@ def getAllConsumers():
         return ConsumerHandler().searchConsumer(request.args)
 
 
-@app.route('/DSRLApp/consumers/<int:cid>', methods=['GET', 'PUT', 'DELETE'])
+@app.route('/DSRLApp/consumers/<int:cid>', methods=['GET', 'PUT'])
 def getConsumerById(cid):
     if request.method == 'GET':
         return ConsumerHandler().getConsumerById(cid)
@@ -121,8 +114,6 @@ def getConsumerById(cid):
             return ConsumerHandler().updateConsumer(cid, request.json)
         else:
             return jsonify(Error="No attributes were provided."), 404
-    elif request.method == 'DELETE':
-        return ConsumerHandler().deleteConsumer(cid)
     else:
         return jsonify(Error="Method not allowed."), 405
 
@@ -135,7 +126,7 @@ def getAllSuppliers():
         return SupplierHandler().searchSupplier(request.args)
 
 
-@app.route('/DSRLApp/suppliers/<int:sid>', methods=['GET', 'PUT', 'DELETE'])
+@app.route('/DSRLApp/suppliers/<int:sid>', methods=['GET', 'PUT'])
 def getSupplierById(sid):
     if request.method == 'GET':
         return SupplierHandler().getSupplierById(sid)
@@ -144,8 +135,6 @@ def getSupplierById(sid):
             return SupplierHandler().updateSupplier(sid, request.json)
         else:
             return jsonify(Error="No attributes were provided."), 404
-    elif request.method == 'DELETE':
-        return SupplierHandler().deleteSupplier(sid)
     else:
         return jsonify(Error="Method not allowed."), 405
 
@@ -155,20 +144,13 @@ def getAllAdministrators():
     if not request.args:
         return AdministratorHandler().getAllAdministrators()
     else:
-        return AdministratorHandler().searchAdministrator(request.args)
+        return jsonify(ERROR="There are no arguments in the administrator table.")
 
 
-@app.route('/DSRLApp/administrators/<int:aid>', methods=['GET', 'PUT', 'DELETE'])
+@app.route('/DSRLApp/administrators/<int:aid>', methods=['GET'])
 def getAdministratorByAdminId(aid):
     if request.method == 'GET':
-        return AdministratorHandler().getAdministratorByAdminId()
-    elif request.method == 'PUT':
-        if request.json:
-            return AdministratorHandler().updateAdministrator(aid, request.json)
-        else:
-            return jsonify(Error="No attributes were provided."), 404
-    elif request.method == 'DELETE':
-        return AdministratorHandler().deleteAdministrator(aid)
+        return AdministratorHandler().getAdministratorByAdminId(aid)
     else:
         return jsonify(Error="Method not allowed."), 405
 
@@ -201,13 +183,6 @@ def getAllResourcesAvailable():
 def getSupplyById(suid):
     if request.method == 'GET':
         return SupplyHandler().getSupplyById(suid)
-    elif request.method == 'PUT':
-        if request.json:
-            return SupplyHandler().updateSupply(suid, request.args)
-        else:
-            return jsonify(Error="No attributes were provided."), 404
-    elif request.method == 'DELETE':
-        return SupplyHandler().deleteSupply(suid)
     else:
         return jsonify(Error="Method not allowed."), 405
 
@@ -236,17 +211,10 @@ def getAllResourcesRequested():
     return RequestHandler().getAllResourcesRequested()
 
 
-@app.route('/DSRLApp/requests/<int:reqid>', methods=['GET', 'PUT', 'DELETE'])
+@app.route('/DSRLApp/requests/<int:reqid>', methods=['GET'])
 def getRequestById(reqid):
     if request.method == 'GET':
         return RequestHandler().getRequestById(reqid)
-    elif request.method == 'PUT':
-        if request.json:
-            return RequestHandler().updateRequest(reqid, request.args)
-        else:
-            return jsonify(Error="No attributes were provided."), 404
-    elif request.method == 'DELETE':
-        return RequestHandler().deleteRequest(reqid)
     else:
         return jsonify(Error="Method not allowed."), 405
 
@@ -260,9 +228,12 @@ def getResourceByRequestId(reqid):
 def getAllOrders():
     if request.method == 'POST':
         if request.json:
-            return OrderHandler().insertOrder(request.json)
-        else:
-            return jsonify(Error="No order was provided.")
+            for keys in request.json.keys():
+                if keys == 'uid':
+                    return OrderHandler().insertOrderByUserId(request.json)
+                elif keys == 'cid':
+                    return OrderHandler().insertOrderByConsumerId(request.json)
+        return jsonify(Error="No order was provided.")
     else:
         if not request.args:
             return OrderHandler().getAllOrders()
@@ -270,17 +241,10 @@ def getAllOrders():
             return OrderHandler().searchOrder(request.args)
 
 
-@app.route('/DSRLApp/orders/<int:onumber>', methods=['GET', 'PUT', 'DELETE'])
+@app.route('/DSRLApp/orders/<int:onumber>', methods=['GET'])
 def getOrderById(onumber):
     if request.method == 'GET':
         return OrderHandler().getOrderById(onumber)
-    elif request.method == 'PUT':
-        if request.json:
-            return OrderHandler().updateOrder(onumber, request.args)
-        else:
-            return jsonify(Error="No attributes were provided."), 404
-    elif request.method == 'DELETE':
-        return OrderHandler().deleteOrder(onumber)
     else:
         return jsonify(Error="Method not allowed."), 405
 
@@ -294,7 +258,10 @@ def getSupplyByOrderId(onumber):
 def getAllReserved():
     if request.method == 'POST':
         if request.json:
-            return ReservedHandler().insertReserved(request.json)
+            if request.json['uid']:
+                return ReservedHandler().insertReservedByUserId(request.json)
+            elif request.json['cid']:
+                return ReservedHandler().insertReservedByConsumerId(request.json)
         else:
             return jsonify(Error="No reservation was provided.")
     else:
@@ -304,17 +271,10 @@ def getAllReserved():
             return ReservedHandler().searchReserved(request.args)
 
 
-@app.route('/DSRLApp/reserved/<int:rnumber>', methods=['GET', 'PUT', 'DELETE'])
+@app.route('/DSRLApp/reserved/<int:rnumber>', methods=['GET'])
 def getReservedById(rnumber):
     if request.method == 'GET':
         return ReservedHandler().getReservedById(rnumber)
-    elif request.method == 'PUT':
-        if request.json:
-            return ReservedHandler().updateReserved(rnumber, request.args)
-        else:
-            return jsonify(Error="No attributes were provided."), 404
-    elif request.method == 'DELETE':
-        return ReservedHandler().deleteReserved(rnumber)
     else:
         return jsonify(Error="Method not allowed."), 405
 
@@ -322,6 +282,7 @@ def getReservedById(rnumber):
 @app.route('/DSRLApp/reserved/<int:rnumber>/supply')
 def getSupplyByReservedId(rnumber):
     return ReservedHandler().getSupplyByReservedId(rnumber)
+
 
 @app.route('/DSRLApp/users/billinginformation', methods=['GET', 'POST'])
 def getAllBillingInformation():
@@ -337,34 +298,27 @@ def getAllBillingInformation():
             return BillingInformationHandler().searchBillingInformation(request.args)
 
 
-@app.route('/DSRLApp/users/billinginformation/<int:bid>', methods=['GET', 'PUT', 'DELETE'])
+@app.route('/DSRLApp/users/billinginformation/<int:bid>', methods=['GET'])
 def getBillingInformationById(bid):
     if request.method == 'GET':
         return BillingInformationHandler().getBillingInformationById(bid)
-    elif request.method == 'PUT':
-        if request.json:
-            return BillingInformationHandler().updateBillingInformation(bid, request.args)
-        else:
-            return jsonify(Error="No attributes were provided."), 404
-    elif request.method == 'DELETE':
-        return BillingInformationHandler().deleteBillingInformation(bid)
     else:
         return jsonify(Error="Method not allowed."), 405
 
 
-@app.route('/DSRLApp/users/<int:uid>/billinginformation')
+@app.route('/DSRLApp/users/<int:uid>/billinginformation', methods=['GET'])
 def getBillingInformationByUserId(uid):
     return BillingInformationHandler().getBillingInformationByUserId(uid)
 
 
-@app.route('/DSRLApp/users/<int:uid>/orders', methods=['GET', 'PUT', 'DELETE'])
+@app.route('/DSRLApp/users/<int:uid>/orders', methods=['GET'])
 def getOrderByUserId(uid):
-    return OrderHandler.getOrderByUserId(uid)
+    return OrderHandler().getOrderByUserId(uid)
 
 
-@app.route('/DSRLApp/users/<int:uid>/requests', methods=['GET', 'PUT', 'DELETE'])
+@app.route('/DSRLApp/users/<int:uid>/reserved', methods=['GET'])
 def getReservedByUserId(uid):
-    return ReservedHandler.getReservedByUserId(uid)
+    return ReservedHandler().getReservedByUserId(uid)
 
 
 @app.route('/DSRLApp/categories', methods=['GET', 'POST'])
@@ -381,7 +335,7 @@ def getAllCategories():
             return CategoryHandler().searchCategory(request.args)
 
 
-@app.route('/DSRLApp/categories/<int:catid>', methods=['GET', 'PUT', 'DELETE'])
+@app.route('/DSRLApp/categories/<int:catid>', methods=['GET'])
 def getCategoriesById(catid):
     return CategoryHandler().getCategoryById(catid)
 

@@ -319,16 +319,16 @@ class SupplierDAO:
         else:
             return None
 
-    def deleteSupplier(self, uid):
+    def deleteSupplier(self, sid):
         cursor = self.conn.cursor()
-        query = "delete from supplier where uid = %s;"
-        cursor.execute(query, (uid,))
+        query = "delete from supplier where sid = %s;"
+        cursor.execute(query, (sid,))
         self.conn.commit()
-        return uid
+        return sid
 
-    def update(self, uid, saddress, company_name):
+    def updateSupplier(self, sid, saddress, company_name):
         cursor = self.conn.cursor()
-        query = "update supplier set saddress = %s, company_name = %s where uid = %s;"
-        cursor.execute(query, (saddress, company_name, uid))
+        query = "update supplier set saddress = %s, company_name = %s where sid = %s;"
+        cursor.execute(query, (saddress, company_name, sid))
         self.conn.commit()
-        return uid
+        return sid

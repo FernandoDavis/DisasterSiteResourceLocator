@@ -181,7 +181,7 @@ class ConsumerDAO:
         self.conn.commit()
         return cid
 
-    def update(self, cid, caddress):
+    def updateConsumer(self, cid, caddress):
         cursor = self.conn.cursor()
         query = "update consumer set saddress = %s where cid = %s;"
         cursor.execute(query, (caddress, cid))

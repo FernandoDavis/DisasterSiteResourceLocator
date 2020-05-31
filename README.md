@@ -14,7 +14,7 @@ Jose Tua Colon
 # Database Table Creation and Data Update
 This file goes through every table in the data base and creates it if it doesnt exists or truncates it.
 After "resetting" every table with the references and serial ids, the ten or more default inserts for each table
-is executed.
+is executed.  
 [dsrldb.dataupdate.sql](https://github.com/FernandoDavis/DisasterSiteResourceLocator_DB/blob/master/dsrldb.dataupdate.sql)
 
 # Report for Phase 1  

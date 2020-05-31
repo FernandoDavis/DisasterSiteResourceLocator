@@ -33,7 +33,7 @@ class OrderHandler:
         dao = OrderDAO()
         row = dao.getOrdersById(onumber)
         if not row:
-            return jsonify(Error="Request Not Found"), 404
+            return jsonify(Error="Order Not Found"), 404
         else:
             result = self.build_order_dict(row[0])
         return jsonify(Order=result)
